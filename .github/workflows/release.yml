@@ -6,7 +6,7 @@ on:
         description: override release tag
         required: false
   push:
-    branches: ['main', 'alpha', 'beta', 'rc']
+    branches: ['master', 'alpha', 'beta', 'rc']
     paths:
       - ".changeset/**"
       - "packages/**"
@@ -47,7 +47,7 @@ jobs:
         - name: Publish ${{ inputs.tag || 'canary' }}
           if: steps.changesets.outputs.published != 'true'
           run: |
-            git checkout main
+            git checkout master
             bun version:canary
             bun release:canary --tag ${{ inputs.tag || 'canary' }}
           env:
