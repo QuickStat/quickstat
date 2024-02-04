@@ -39,7 +39,7 @@
     "typecheck": "tsc -p ./tsconfig.json --noEmit --emitDeclarationOnly false"
   },
   "dependencies": {
-    "@quickstat/template-core": "workspace:*"
+    "@quickstat/core": "workspace:*"
   },
   "devDependencies": {
     "@quickstat/eslint-config": "workspace:*",
