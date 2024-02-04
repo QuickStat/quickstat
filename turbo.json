@@ -19,13 +19,16 @@
     },
     "start": {
       "dependsOn": [
-        "^start"
+        "^wait"
       ],
       "outputs": [
         "dist/**"
       ],
       "cache": false,
       "persistent": true
+    },
+    "wait": {
+      "cache": false
     },
     "test": {
       "dependsOn": [],
