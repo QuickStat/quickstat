@@ -1,0 +1,55 @@
+name: Release
+on:
+  workflow_dispatch:
+    inputs:
+      tag:
+        description: override release tag
+        required: false
+  push:
+    branches: ['main', 'alpha', 'beta', 'rc']
+    paths:
+      - ".changeset/**"
+      - "packages/**"
+
+
+concurrency: ${{ github.workflow }}-${{ github.ref }}
+
+jobs:
+  release:
+      name: Release
+      timeout-minutes: 15
+      runs-on: ubuntu-latest
+      steps:
+        - name: Check out code
+          uses: actions/checkout@v4
+          with:
+            fetch-depth: 2
+
+        - name: Setup
+          uses: ./.github/setup
+
+        - name: Build
+          run: bun run build --concurrency=1
+
+        - name: Publish
+          id: changesets
+          uses: changesets/action@v1
+          if: ${{ github.event.inputs.tag == '' }}
+          with:
+            publish: bun release
+            commit: "ci(changesets): version packages"
+            setupGitUser: false
+          env:
+            NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+            NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+            GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+        - name: Publish ${{ inputs.tag || 'canary' }}
+          if: steps.changesets.outputs.published != 'true'
+          run: |
+            git checkout main
+            bun version:canary
+            bun release:canary --tag ${{ inputs.tag || 'canary' }}
+          env:
+            NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+            GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
