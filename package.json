@@ -51,7 +51,7 @@
     "@types/node": "^20.10.4",
     "@vitest/coverage-v8": "^0.34.6",
     "@vitest/ui": "^0.34.7",
-    "bun-types": "^1.0.17",
+    "bun-types": "^1.0.25",
     "dprint": "^0.41.0",
     "prettier": "^3.1.1",
     "prettier-eslint": "^16.1.2",
