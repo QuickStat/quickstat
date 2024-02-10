@@ -1,0 +1,8 @@
+scrape_configs:
+  - job_name: 'QuickStatMetrics'
+    metrics_path: '/'
+    scrape_interval: 3s
+    static_configs:
+      - targets: ['172.23.0.1:3242']
+        labels:
+          application: 'Quickstat'

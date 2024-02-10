@@ -1,11 +1,11 @@
 {
-  "name": "@quickstat/demo",
+  "name": "@quickstat/prometheus",
   "version": "2.3.0",
-  "description": "Demo",
+  "description": "Prometheus datasource for QuickStat",
   "repository": {
     "type": "git",
     "url": "git://https://github.com/QuickStat/quickstat.git",
-    "directory": "packages/demo"
+    "directory": "packages/datasources/prometheus"
   },
   "license": "Apache-2.0",
   "author": "DxLoop",
@@ -39,8 +39,7 @@
     "typecheck": "tsc -p ./tsconfig.json --noEmit --emitDeclarationOnly false"
   },
   "dependencies": {
-    "@quickstat/core": "workspace:*",
-    "@quickstat/prometheus": "workspace:*"
+    "@quickstat/core": "workspace:*"
   },
   "devDependencies": {
     "@quickstat/eslint-config": "workspace:*",

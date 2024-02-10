@@ -45,3 +45,5 @@ private
 test.json
 .turbo
 .next
+
+.pnpm-store
