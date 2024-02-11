@@ -10,6 +10,7 @@ export interface ScrapeStrategyOptions extends BaseStrategyOptions {
 
 /**
  * The scrape strategy for collecting the metrics
+ * @template ST The type of the strategy
  */
 export class ScrapeStrategy extends BaseStrategy<ScrapeStrategy> {
   /**

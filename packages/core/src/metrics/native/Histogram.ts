@@ -168,6 +168,10 @@ export class NativeHistogram extends Metric<NativeHistogram> implements INativeM
     }
   }
 
+  /**
+   * Register histogram to the client.
+   * @param client The client to register the histogram to
+   */
   register(client: Client) {
     client.registerMetric(this)
   }

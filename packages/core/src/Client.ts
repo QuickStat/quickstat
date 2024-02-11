@@ -1,6 +1,10 @@
 import type { DataSource } from './datasources/DataSource'
 import type { INativeMetric, Metric } from './metrics/Metric'
 
+/**
+ * The options for the client.
+ * @template D The data source type
+ */
 export interface ClientOptions<D extends DataSource = DataSource> {
   /**
    * The data source to persist the metrics on e.g. prometheus, influxdb, etc.
@@ -18,6 +22,7 @@ export interface ClientOptions<D extends DataSource = DataSource> {
 
 /**
  * The client which contains the config for the data sources and plugins for collecting and persisting the metrics.
+ * @template D The data source type
  */
 export class Client<D extends DataSource = DataSource> {
   /** The data source to persist the metrics on e.g. prometheus, influxdb, etc. */

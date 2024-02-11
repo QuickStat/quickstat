@@ -4,6 +4,10 @@ import type { DataPoint, DataPointLabelValue } from 'src/datapoints/DataPoint'
 import { DataPointManager } from 'src/datapoints/DataPointManager'
 import { normalizeLabelName } from 'src/shared/utils'
 
+/**
+ * The options for the metric.
+ * @template T The type of the metric
+ */
 export interface MetricOptions<T> {
   /** The name of the metric. Do not any of these reserved suffixes '_total', '_sum' e.g. 'requests' -> 'requests_total' */
   name: Lowercase<string>
@@ -19,6 +23,7 @@ export interface MetricOptions<T> {
 
 /**
  * Base metric containing the data points and the info for the metric.
+ * @template T The type of the metric
  */
 export class Metric<T> {
   /** The unique key for the metric */
@@ -96,6 +101,7 @@ export class Metric<T> {
 
   /**
    * Validate that the given labels equals the metric labels.
+   * @param labels The labels to validate
    */
   validateLabels(labels: string[]) {
     if (labels.length !== this.labels.length) {
@@ -104,9 +110,17 @@ export class Metric<T> {
   }
 }
 
+/**
+ * The native metric containing the data points and the info for the native metric.
+ * @template T The type of the native metric
+ */
 export interface INativeMetric<T = never> extends Metric<T> {
+  /** The type of the native metric */
   type: NativeMetricTypes
+  /** Collect the metric */
   collect(timestamp: number): Promise<DataPoint>
+  /** Register the metric to the client */
   register(clie: Client): void
+  /** Validate the options of the metric */
   validateOptions(): void
 }

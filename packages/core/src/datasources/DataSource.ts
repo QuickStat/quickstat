@@ -8,7 +8,15 @@ export interface DataSourceOptions {
   client?: Client
 }
 
-export type DataSourceCollectMetric = { data: DataPoint; metric: INativeMetric }
+/**
+ * The collect metric entity from the data source.
+ */
+export type DataSourceCollectMetric = { 
+  /** The data of the metric */
+  data: DataPoint;
+  /** The metric */
+  metric: INativeMetric
+}
 
 /**
  * The data source for persisting the metrics e.g. prometheus, influxdb, etc.

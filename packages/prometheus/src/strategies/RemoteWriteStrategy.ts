@@ -7,6 +7,7 @@ export interface RemoteWriteStrategyOptions extends BaseStrategyOptions {}
 
 /**
  * The remote write strategy for persisting the metrics
+ * @template ST The type of the strategy
  */
 export class RemoteWriteStrategy extends BaseStrategy<RemoteWriteStrategy> {
   /**

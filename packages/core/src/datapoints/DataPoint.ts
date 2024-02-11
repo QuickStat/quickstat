@@ -1,5 +1,3 @@
-import type { NativeMetricTypes } from 'src/shared/types'
-
 /**
  * The options for the data point.
  */

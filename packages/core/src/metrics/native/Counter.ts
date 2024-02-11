@@ -140,6 +140,10 @@ export class NativeCounter extends Metric<NativeCounter> implements INativeMetri
     }
   }
 
+  /**
+   * Register the counter to the client.
+   * @param client The client to register the counter to
+   */
   register(client: Client) {
     client.registerMetric(this)
   }

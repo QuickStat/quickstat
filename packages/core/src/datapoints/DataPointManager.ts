@@ -12,6 +12,9 @@ export class DataPointManager {
     this.dataPoints = new Map()
   }
 
+  /**
+   * Clear the data points from the data point manager.
+   */
   clear(): void {
     this.dataPoints.clear()
   }

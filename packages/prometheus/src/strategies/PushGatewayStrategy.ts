@@ -7,6 +7,7 @@ export interface PushGatewayStrategyOptions extends BaseStrategyOptions {}
 
 /**
  * The push gateway strategy for persisting the metrics
+ * @template ST The type of the strategy
  */
 export class PushGatewayStrategy extends BaseStrategy<PushGatewayStrategy> {
 }

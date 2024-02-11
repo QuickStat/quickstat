@@ -65,7 +65,7 @@ export class PromFileGenerator {
   }
 
   /**
-   * Get oberserable Metric section from the collected metric e.g. histogram, summary.
+   * Get observable Metric section from the collected metric e.g. histogram, summary.
    * @param data The data of the metric
    * @param metric The metric
    * @param suffix The suffix for the metric name
