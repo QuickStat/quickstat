@@ -1,21 +1,21 @@
-import { Metric, type INativeMetric, type MetricOptions } from "../Metric";
-import { DataPoint, type DataPointLabelValue } from "src/datapoints/DataPoint";
-import type { Client } from "src/Client";
-import { NativeMetricTypes } from "src";
+import { Metric, type INativeMetric, type MetricOptions } from '../Metric'
+import { DataPoint, type DataPointLabelValue } from 'src/datapoints/DataPoint'
+import type { Client } from 'src/Client'
+import { NativeMetricTypes } from 'src'
 
 /**
  * The options for the counter metric.
  */
 export interface NativeCounterOptions extends MetricOptions<NativeCounter> {
-    /** The initial value of the counter */
-    value?: number;
-    /** The reset options for the counter */
-    reset?: {
-        /** The value to reset the counter to */
-        value?: (counter: NativeCounter) => void;
-        /** The interval to reset the counter at */
-        interval?: number;
-    }
+  /** The initial value of the counter */
+  value?: number
+  /** The reset options for the counter */
+  reset?: {
+    /** The value to reset the counter to */
+    value?: (counter: NativeCounter) => void
+    /** The interval to reset the counter at */
+    interval?: number
+  }
 }
 
 /**
@@ -23,144 +23,147 @@ export interface NativeCounterOptions extends MetricOptions<NativeCounter> {
  * @example "Number of http requests processed by a web server."
  */
 export class NativeCounter extends Metric<NativeCounter> implements INativeMetric<NativeCounter> {
-    type: NativeMetricTypes = NativeMetricTypes.Counter;
-    /** The initial value of the counter */
-    value: number;
-    /** The values of the counter */
-    values: DataPointLabelValue[];
-    /** The reset options for the counter */
-    resetOption: {
-        /** The value to reset the counter to */
-        value: (counter: NativeCounter) => void;
-        /** The interval to reset the counter at */
-        interval: number;
-    }
-    /**
-     * The interval to reset the counter at
-     */
-    private interval?: Timer;
+  type: NativeMetricTypes = NativeMetricTypes.Counter
+  /** The initial value of the counter */
+  value: number
+  /** The values of the counter */
+  values: DataPointLabelValue[]
+  /** The reset options for the counter */
+  resetOption: {
+    /** The value to reset the counter to */
+    value: (counter: NativeCounter) => void
+    /** The interval to reset the counter at */
+    interval: number
+  }
+  /**
+   * The interval to reset the counter at
+   */
+  private interval?: Timer
 
-    /**
-     * Creates a new counter metric instance which holds the data points and the info for the metric.
-     * @param options The options for the counter metric
-     */
-    constructor(options: NativeCounterOptions) {
-        super(options);
-        this.value = options.value || 0;
-        this.values = [];
-        this.resetOption = {
-            value: options.reset?.value || ((counter: NativeCounter) => { counter.value = 0; counter.values = []; }),
-            interval: options.reset?.interval || -1
-        };
-
-        // Set up the reset interval if enabled
-        this.setUpReset();
-
-        // Validate the counter options
-        this.validateOptions();
+  /**
+   * Creates a new counter metric instance which holds the data points and the info for the metric.
+   * @param options The options for the counter metric
+   */
+  constructor(options: NativeCounterOptions) {
+    super(options)
+    this.value = options.value || 0
+    this.values = []
+    this.resetOption = {
+      value: options.reset?.value || ((counter: NativeCounter) => {
+        counter.value = 0
+        counter.values = []
+      }),
+      interval: options.reset?.interval || -1,
     }
 
-    /**
-     * Set the counter to the given value.
-     * @param labels The labels of the counter e.g. ['method', 'path']=['GET', '/test']
-     * @param value The value to set the counter to e.g. 1
-     */
-    set(labels: string[], value: number = 0) {
-        this.value = value;
+    // Set up the reset interval if enabled
+    this.setUpReset()
 
-        if (labels.length > 0) {
-            this.validateLabels(labels);
+    // Validate the counter options
+    this.validateOptions()
+  }
 
-            const index = this.values.findIndex(value => value.labels.join() === labels.join());
-            if (index === -1) {
-                this.values.push({ labels, value, sum: value });
-            } else {
-                this.values[index]!.value = value;
-            }
-        }
+  /**
+   * Set the counter to the given value.
+   * @param labels The labels of the counter e.g. ['method', 'path']=['GET', '/test']
+   * @param value The value to set the counter to e.g. 1
+   */
+  set(labels: string[], value: number = 0) {
+    this.value = value
 
-        this.snapshot();
+    if (labels.length > 0) {
+      this.validateLabels(labels)
+
+      const index = this.values.findIndex(value => value.labels.join() === labels.join())
+      if (index === -1) {
+        this.values.push({ labels, value, sum: value })
+      } else {
+        this.values[index]!.value = value
+      }
     }
 
-    /**
-     * Increment the counter by the given value.
-     * @param labels The labels of the counter e.g. ['method', 'path']=['GET', '/test']
-     * @param value The value to increment the counter by e.g. 1
-     */
-    inc(labels: string[], value: number = 1) {
-        value = Math.abs(value);
-        this.value += value;
+    this.snapshot()
+  }
 
-        if (labels.length > 0) {
-            this.validateLabels(labels);
+  /**
+   * Increment the counter by the given value.
+   * @param labels The labels of the counter e.g. ['method', 'path']=['GET', '/test']
+   * @param value The value to increment the counter by e.g. 1
+   */
+  inc(labels: string[], value: number = 1) {
+    value = Math.abs(value)
+    this.value += value
 
-            const index = this.values.findIndex(value => value.labels.join() === labels.join());
-            if (index === -1) {
-                this.values.push({ labels, value, sum: value });
-            } else {
-                this.values[index]!.value += value;
-            }
-        }
+    if (labels.length > 0) {
+      this.validateLabels(labels)
 
-        this.snapshot();
+      const index = this.values.findIndex(value => value.labels.join() === labels.join())
+      if (index === -1) {
+        this.values.push({ labels, value, sum: value })
+      } else {
+        this.values[index]!.value += value
+      }
     }
 
-    /**
-     * Collect the counter metric.
-     * @param timestamp The timestamp of the data point
-     */
-    async collect(timestamp: number = Date.now()): Promise<DataPoint> {
-        await super.executeOnCollect(this);
-        const dataPoint = this.snapshot(timestamp, true); // Snapshot the current value and values of the counter to the data points manager
-        await super.executeAfterCollect(this);
-        return dataPoint;
+    this.snapshot()
+  }
+
+  /**
+   * Collect the counter metric.
+   * @param timestamp The timestamp of the data point
+   */
+  async collect(timestamp: number = Date.now()): Promise<DataPoint> {
+    await super.executeOnCollect(this)
+    const dataPoint = this.snapshot(timestamp, true) // Snapshot the current value and values of the counter to the data points manager
+    await super.executeAfterCollect(this)
+    return dataPoint
+  }
+
+  /**
+   * Reset the counter with the custom provided function or the default one.
+   */
+  reset() {
+    return this.resetOption.value(this)
+  }
+
+  /**
+   * Increment the counter by the given value.
+   * @param value The value to increment the counter by
+   */
+  validateOptions() {
+    if (this.value < 0) {
+      throw new Error('The value of the counter cannot be negative.')
     }
 
-    /**
-     * Reset the counter with the custom provided function or the default one.
-     */
-    reset() {
-        return this.resetOption.value(this);
+    if (this.resetOption?.interval != -1 && this.resetOption?.interval < 1) {
+      throw new Error('The interval of the counter reset must be bigger than 0.')
     }
+  }
 
-    /**
-     * Increment the counter by the given value.
-     * @param value The value to increment the counter by
-     */
-    validateOptions() {
-        if (this.value < 0) {
-            throw new Error("The value of the counter cannot be negative.");
-        }
+  register(client: Client) {
+    client.registerMetric(this)
+  }
 
-        if (this.resetOption?.interval != -1 && this.resetOption?.interval < 1) {
-            throw new Error("The interval of the counter reset must be bigger than 0.");
-        }
+  /**
+   * Snapshot the current value and values of the counter to the data points manager.
+   * @param timestamp The timestamp of the data point
+   * @param createdOnCollect Whether the data point has been created on collect
+   */
+  protected snapshot(timestamp: number = Date.now(), createdOnCollect: boolean = false): DataPoint {
+    const dataPoint = DataPoint.from({ timestamp, value: this.value, values: this.values, createdOnCollect })
+    this.dataPoints.add(dataPoint)
+    return dataPoint
+  }
+
+  /**
+   * Set up the reset interval if enabled.
+   */
+  private setUpReset() {
+    clearInterval(this.interval)
+    if (this.resetOption.interval > 0) {
+      this.interval = setInterval(() => {
+        this.reset()
+      }, this.resetOption.interval)
     }
-
-    register(client: Client) {
-        client.registerMetric(this);
-    }
-
-    /**
-     * Snapshot the current value and values of the counter to the data points manager.
-     * @param timestamp The timestamp of the data point
-     * @param createdOnCollect Whether the data point has been created on collect
-     */
-    protected snapshot(timestamp: number = Date.now(), createdOnCollect: boolean = false): DataPoint {
-        const dataPoint = DataPoint.from({ timestamp, value: this.value, values: this.values, createdOnCollect });
-        this.dataPoints.add(dataPoint);
-        return dataPoint;
-    }
-
-    /**
-     * Set up the reset interval if enabled.
-     */
-    private setUpReset() {
-        clearInterval(this.interval);
-        if (this.resetOption.interval > 0) {
-            this.interval = setInterval(() => {
-                this.reset();
-            }, this.resetOption.interval);
-        }
-    }
+  }
 }
