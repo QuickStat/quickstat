@@ -2,8 +2,8 @@ import { DataSource, type DataSourceOptions } from '@quickstat/core'
 import type { ScrapeStrategy } from './strategies/ScrapeStrategy'
 import { BaseStrategy } from './strategies/BaseStrategy'
 
-/** 
- * The options for the prometheus data source 
+/**
+ * The options for the prometheus data source
  * @template ST The type of the strategy
  */
 export interface PrometheusDataSourceOptions<ST> extends DataSourceOptions {

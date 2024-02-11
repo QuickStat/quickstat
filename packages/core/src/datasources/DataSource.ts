@@ -11,9 +11,9 @@ export interface DataSourceOptions {
 /**
  * The collect metric entity from the data source.
  */
-export type DataSourceCollectMetric = { 
+export type DataSourceCollectMetric = {
   /** The data of the metric */
-  data: DataPoint;
+  data: DataPoint
   /** The metric */
   metric: INativeMetric
 }

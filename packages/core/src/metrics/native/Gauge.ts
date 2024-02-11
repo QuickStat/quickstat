@@ -8,7 +8,6 @@ export interface NativeGaugeOptions extends NativeCounterOptions {
  * @example "The current number of active threads in a thread pool."
  */
 export class Gauge extends NativeCounter {
-
   /**
    * The constructor for the gauge
    * @param options The options for the gauge
