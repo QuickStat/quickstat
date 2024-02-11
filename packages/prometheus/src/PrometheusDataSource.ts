@@ -24,7 +24,7 @@ export class PrometheusDataSource<ST extends BaseStrategy<ST> = ScrapeStrategy> 
    * @param options The options for the prometheus data source
    * @template ST The type of the strategy
    */
-  constructor(options: PrometheusDataSourceOptions<ST>) {
+  constructor(options: PrometheusDataSourceOptions<ST> = {}) {
     super(options)
     if (options.strategy) this.setStrategy(options.strategy)
   }

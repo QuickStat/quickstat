@@ -8,6 +8,14 @@ services:
     volumes:
       - ./prometheus/prometheus.yml:/etc/prometheus/prometheus.yml
 
+  pushgateway:
+    image: prom/pushgateway
+    container_name: pushgateway
+    network_mode: host
+    restart: unless-stopped
+    ports:
+      - "9091:9091"
+
   grafana:
     image: grafana/grafana:9.5.2
     container_name: grafana

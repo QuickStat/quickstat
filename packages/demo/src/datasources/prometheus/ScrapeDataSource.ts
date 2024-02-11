@@ -1,10 +1,9 @@
-import { DataSource } from '@quickstat/core'
 import { PrometheusDataSource, ScrapeStrategy } from '@quickstat/prometheus'
 
-const dataSource = new PrometheusDataSource({})
+const dataSource = new PrometheusDataSource()
 
 dataSource.setStrategy(
-  new ScrapeStrategy({}),
+  new ScrapeStrategy(),
 )
 
 export default dataSource

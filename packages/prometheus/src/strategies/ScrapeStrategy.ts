@@ -17,7 +17,7 @@ export class ScrapeStrategy extends BaseStrategy<ScrapeStrategy> {
    * The constructor for the scrape strategy
    * @param options The options for the scrape strategy
    */
-  constructor(options: ScrapeStrategyOptions) {
+  constructor(options: ScrapeStrategyOptions = {}) {
     super(options)
   }
 

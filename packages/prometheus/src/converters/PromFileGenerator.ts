@@ -20,6 +20,7 @@ export class PromFileGenerator {
    */
   get() {
     const lines = this.collectedMetrics.flatMap(this.getMetricSection.bind(this))
+    lines.push('') // Add a new line at the end of the file
     return lines.join('\n')
   }
 

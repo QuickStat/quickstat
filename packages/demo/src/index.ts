@@ -1,8 +1,9 @@
 import { Gauge, NativeCounter, Client as QuickStatClient, NativeHistogram } from '@quickstat/core'
-import type { PrometheusDataSource } from '@quickstat/prometheus'
-import dataSource from './datasources/prometheus/ScrapeDataSource'
+import type { PrometheusDataSource, PushGatewayStrategy } from '@quickstat/prometheus'
+import scrapeDataSource from './datasources/prometheus/ScrapeDataSource'
+import pushGatewayDataSource from './datasources/prometheus/PushGatewayDataSource'
 
-const quickStatClient = new QuickStatClient<PrometheusDataSource>({
+const quickStatClient = new QuickStatClient<PrometheusDataSource<PushGatewayStrategy>>({
   metrics: [],
   plugins: [],
 })
@@ -33,7 +34,7 @@ quickStatClient.registerMetric(activeThreadsCounter)
 quickStatClient.registerMetric(nativeHistogramm)
 
 // Register the data source
-quickStatClient.registerDataSource(dataSource)
+quickStatClient.registerDataSource(pushGatewayDataSource)
 
 setInterval(async () => {
   requestsCounter.inc(['GET', '200'], 2)
@@ -44,7 +45,7 @@ setInterval(async () => {
   nativeHistogramm.observe(['GET', '200'], Math.random() * 100000000000)
 }, 100)
 
-// HTTP Server
+/* // HTTP Server
 import http from 'http'
 http.createServer(async (req, res) => {
   requestsCounter.inc(['PROM', '200'], 1)
@@ -52,4 +53,4 @@ http.createServer(async (req, res) => {
   console.log(response)
   res.writeHead(200, response?.headers)
   res.end(response?.file)
-}).listen(3242)
+}).listen(3242) */
