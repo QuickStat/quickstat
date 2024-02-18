@@ -1,13 +1,13 @@
-import { NativeCounter, type NativeCounterOptions } from './Counter'
+import { NativeCounter, type NativeCounterOptions } from '../counter/NativeCounter'
 
-export interface NativeGaugeOptions extends NativeCounterOptions {
-}
+/** The options for the native gauge */
+export type NativeGaugeOptions = NativeCounterOptions
 
 /**
  * Gauges represent a single numerical value that can go up or down
  * @example "The current number of active threads in a thread pool."
  */
-export class Gauge extends NativeCounter {
+export class NativeGauge extends NativeCounter {
   /**
    * The constructor for the gauge
    * @param options The options for the gauge
@@ -21,7 +21,7 @@ export class Gauge extends NativeCounter {
    * @param labels The labels of the gauge e.g. ['method', 'path']=['GET', '/test']
    * @param value The value to decrement by e.g. 1
    */
-  dec(labels: string[], value: number = 1) {
+  protected _dec(labels: string[], value: number = 1) {
     value = Math.abs(value)
     this.value -= value
 

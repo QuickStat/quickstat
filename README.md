@@ -96,7 +96,7 @@ We are continuously working on expanding our collection of plugins to cover more
 
 ### Data Sources
 
-Data sources play a crucial role in aggregating collected data from registered metrics and persisting them or making them available for visualization in Grafana. QuickStat currently supports Prometheus with various strategies including scrape, push gateway, or remote write. However, there are plans to introduce additional data sources such as InfluxDB, PostgreSQL etc. in the future.
+Data sources play a crucial role in aggregating collected data from registered metrics and persisting them or making them available for visualization in Grafana. QuickStat currently supports Prometheus with various strategies including scrape, push gateway, or remote write (WIP). However, there are plans to introduce additional data sources such as InfluxDB, PostgreSQL etc. in the future.
 
 | Data Source               | Description                                         | Strategies                         |
 | ------------------------- | --------------------------------------------------- | ---------------------------------- |
@@ -130,6 +130,7 @@ We are continuously working on improving QuickStat and adding new features to ma
   - Axios/Fetch: A plugin that provides metrics for Axios and Fetch libraries.
   - Worker Threads/Child Processes: A plugin that provides metrics for Worker Threads and Child Processes.
 - **Data Sources:**
+  - (Prometheus) Remote Write: A data source that can be used to remotely write metrics to Prometheus or other compatible remote write storages.
   - InfluxDB: A data source that can be used to persist metrics in InfluxDB.
   - PostgreSQL: A data source that can be used to persist metrics in PostgreSQL.
 - **Dashboard Templates:**

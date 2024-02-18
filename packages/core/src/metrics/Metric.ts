@@ -59,7 +59,7 @@ export class Metric<T> {
   /**
    * Validates the metric options.
    */
-  validateOptions() {
+  protected validateOptions() {
     if (this.name.length === 0) {
       throw new Error('The name of the metric cannot be empty.')
     }
@@ -103,7 +103,7 @@ export class Metric<T> {
    * Validate that the given labels equals the metric labels.
    * @param labels The labels to validate
    */
-  validateLabels(labels: string[]) {
+  protected validateLabels(labels: string[]) {
     if (labels.length !== this.labels.length) {
       throw new Error('The number of labels does not match the number of label names.')
     }
@@ -120,7 +120,5 @@ export interface INativeMetric<T = never> extends Metric<T> {
   /** Collect the metric */
   collect(timestamp: number): Promise<DataPoint>
   /** Register the metric to the client */
-  register(clie: Client): void
-  /** Validate the options of the metric */
-  validateOptions(): void
+  register(client: Client): void
 }

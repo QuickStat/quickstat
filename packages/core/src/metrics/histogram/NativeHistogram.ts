@@ -8,11 +8,11 @@ import { NativeMetricTypes } from 'src'
  */
 export interface NativeHistogramOptions extends MetricOptions<NativeHistogram> {
   buckets: number[]
-  /** The reset options for the counter */
+  /** The reset options for the histogram */
   reset?: {
-    /** The values to reset the counter to */
-    values?: (counter: NativeHistogram) => void
-    /** The interval to reset the counter at */
+    /** The values to reset the histogram to */
+    values?: (histogram: NativeHistogram) => void
+    /** The interval to reset the histogram at */
     interval?: number
   }
 }
@@ -32,15 +32,15 @@ export class NativeHistogram extends Metric<NativeHistogram> implements INativeM
 
   /** The buckets for the histogram */
   buckets: number[]
-  /** The reset options for the counter */
+  /** The reset options for the histogram */
   resetOption: {
-    /** The values to reset the counter to */
-    values: (counter: NativeHistogram) => void
-    /** The interval to reset the counter at */
+    /** The values to reset the histogram to */
+    values: (histogram: NativeHistogram) => void
+    /** The interval to reset the histogram at */
     interval: number
   }
   /**
-   * The interval to reset the counter at
+   * The interval to reset the histogram at
    */
   private interval?: Timer
 
@@ -59,8 +59,8 @@ export class NativeHistogram extends Metric<NativeHistogram> implements INativeM
     this.labels.unshift('le')
 
     this.resetOption = {
-      values: options.reset?.values || ((counter: NativeHistogram) => {
-        counter.values = []
+      values: options.reset?.values || ((histogram: NativeHistogram) => {
+        histogram.values = []
       }),
       interval: options.reset?.interval || -1,
     }
@@ -70,7 +70,7 @@ export class NativeHistogram extends Metric<NativeHistogram> implements INativeM
     // Set up the reset interval if enabled
     this.setUpReset()
 
-    // Validate the counter options
+    // Validate the histogram options
     this.validateOptions()
   }
 
@@ -79,16 +79,16 @@ export class NativeHistogram extends Metric<NativeHistogram> implements INativeM
    * @param labels The labels of the histogram e.g. ['status','200']
    * @param observedValue The value to observe
    */
-  observe(labels: string[], observedValue: number = 1) {
+  protected _observe(labels: string[], observedValue: number = 1) {
     this.value += observedValue
 
     // Gets all bucket values which are less than or equal to the value + "+Inf"
     const buckets = this.getBucketValues(observedValue)
 
-    // Increment the counter for each bucket value on +1
+    // Increment the histogram for each bucket value on +1
     // -> +Inf is always incremented by 1 -> total count
     buckets.forEach(bucket => {
-      this.observeBucket(labels, bucket, observedValue)
+      this._observeBucket(labels, bucket, observedValue)
     })
 
     this.snapshot()
@@ -100,7 +100,7 @@ export class NativeHistogram extends Metric<NativeHistogram> implements INativeM
    * @param bucket The bucket to observe
    * @param observedValue The observed value
    */
-  observeBucket(labels: string[], bucket: number | '+Inf', observedValue: number = 0) {
+  protected _observeBucket(labels: string[], bucket: number | '+Inf', observedValue: number = 0) {
     const bucketLabels = labels.slice(0) // Shallow copy the labels
     bucketLabels.unshift(bucket.toString()) // Add "le" label before the first label
 
@@ -119,7 +119,7 @@ export class NativeHistogram extends Metric<NativeHistogram> implements INativeM
    * @param value The value to find the bucket for
    * @returns The bucket values for the given value
    */
-  private getBucketValues(value: number): (number | '+Inf')[] {
+  protected getBucketValues(value: number): (number | '+Inf')[] {
     const buckets: (number | '+Inf')[] = []
     for (let i = 0; i < this.buckets.length; i++) {
       if (value <= this.buckets[i]!) {
@@ -136,35 +136,35 @@ export class NativeHistogram extends Metric<NativeHistogram> implements INativeM
    * Set new buckets for the histogram.
    * @param buckets The new buckets for the histogram
    */
-  setBuckets(buckets: number[]) {
+  protected _setBuckets(buckets: number[]) {
     this.buckets = buckets.sort((a, b) => a - b)
   }
 
   /**
-   * Collect the counter metric.
+   * Collect the histogram metric.
    * @param timestamp The timestamp of the data point
    */
   async collect(timestamp: number = Date.now()): Promise<DataPoint> {
     await super.executeOnCollect(this)
-    const dataPoint = this.snapshot(timestamp, true) // Snapshot the current value and values of the counter to the data points manager
+    const dataPoint = this.snapshot(timestamp, true) // Snapshot the current value and values of the histogram to the data points manager
     await super.executeAfterCollect(this)
     return dataPoint
   }
 
   /**
-   * Reset the counter with the custom provided function or the default one.
+   * Reset the histogram with the custom provided function or the default one.
    */
   reset() {
     return this.resetOption.values(this)
   }
 
   /**
-   * Increment the counter by the given value.
-   * @param value The value to increment the counter by
+   * Increment the histogram by the given value.
+   * @param value The value to increment the histogram by
    */
-  validateOptions() {
+  protected validateOptions() {
     if (this.resetOption?.interval != -1 && this.resetOption?.interval < 1) {
-      throw new Error('The interval of the counter reset must be bigger than 0.')
+      throw new Error('The interval of the histogram reset must be bigger than 0.')
     }
   }
 
@@ -172,12 +172,12 @@ export class NativeHistogram extends Metric<NativeHistogram> implements INativeM
    * Register histogram to the client.
    * @param client The client to register the histogram to
    */
-  register(client: Client) {
+  public register(client: Client) {
     client.registerMetric(this)
   }
 
   /**
-   * Snapshot the current value and values of the counter to the data points manager.
+   * Snapshot the current value and values of the histogram to the data points manager.
    * @param timestamp The timestamp of the data point
    * @param createdOnCollect Whether the data point has been created on collect
    */

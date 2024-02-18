@@ -9,6 +9,9 @@ import { NativeMetricTypes } from 'src'
 export interface NativeCounterOptions extends MetricOptions<NativeCounter> {
   /** The initial value of the counter */
   value?: number
+  /** The initial values of the counter with label info */
+  values?: DataPointLabelValue[]
+
   /** The reset options for the counter */
   reset?: {
     /** The value to reset the counter to */
@@ -25,11 +28,11 @@ export interface NativeCounterOptions extends MetricOptions<NativeCounter> {
 export class NativeCounter extends Metric<NativeCounter> implements INativeMetric<NativeCounter> {
   type: NativeMetricTypes = NativeMetricTypes.Counter
   /** The initial value of the counter */
-  value: number
+  protected value: number
   /** The values of the counter */
-  values: DataPointLabelValue[]
+  protected values: DataPointLabelValue[]
   /** The reset options for the counter */
-  resetOption: {
+  private resetOption: {
     /** The value to reset the counter to */
     value: (counter: NativeCounter) => void
     /** The interval to reset the counter at */
@@ -47,7 +50,7 @@ export class NativeCounter extends Metric<NativeCounter> implements INativeMetri
   constructor(options: NativeCounterOptions) {
     super(options)
     this.value = options.value || 0
-    this.values = []
+    this.values = options.values || []
     this.resetOption = {
       value: options.reset?.value || ((counter: NativeCounter) => {
         counter.value = 0
@@ -68,7 +71,7 @@ export class NativeCounter extends Metric<NativeCounter> implements INativeMetri
    * @param labels The labels of the counter e.g. ['method', 'path']=['GET', '/test']
    * @param value The value to set the counter to e.g. 1
    */
-  set(labels: string[], value: number = 0) {
+  protected _set(labels: string[], value: number = 0) {
     this.value = value
 
     if (labels.length > 0) {
@@ -90,7 +93,7 @@ export class NativeCounter extends Metric<NativeCounter> implements INativeMetri
    * @param labels The labels of the counter e.g. ['method', 'path']=['GET', '/test']
    * @param value The value to increment the counter by e.g. 1
    */
-  inc(labels: string[], value: number = 1) {
+  protected _inc(labels: string[], value: number = 1) {
     value = Math.abs(value)
     this.value += value
 
@@ -112,7 +115,7 @@ export class NativeCounter extends Metric<NativeCounter> implements INativeMetri
    * Collect the counter metric.
    * @param timestamp The timestamp of the data point
    */
-  async collect(timestamp: number = Date.now()): Promise<DataPoint> {
+  public async collect(timestamp: number = Date.now()): Promise<DataPoint> {
     await super.executeOnCollect(this)
     const dataPoint = this.snapshot(timestamp, true) // Snapshot the current value and values of the counter to the data points manager
     await super.executeAfterCollect(this)
@@ -122,7 +125,7 @@ export class NativeCounter extends Metric<NativeCounter> implements INativeMetri
   /**
    * Reset the counter with the custom provided function or the default one.
    */
-  reset() {
+  public reset() {
     return this.resetOption.value(this)
   }
 
@@ -130,7 +133,7 @@ export class NativeCounter extends Metric<NativeCounter> implements INativeMetri
    * Increment the counter by the given value.
    * @param value The value to increment the counter by
    */
-  validateOptions() {
+  protected validateOptions() {
     if (this.value < 0) {
       throw new Error('The value of the counter cannot be negative.')
     }
@@ -144,7 +147,7 @@ export class NativeCounter extends Metric<NativeCounter> implements INativeMetri
    * Register the counter to the client.
    * @param client The client to register the counter to
    */
-  register(client: Client) {
+  public register(client: Client) {
     client.registerMetric(this)
   }
 

@@ -1,4 +1,12 @@
-import { DataPoint, Gauge, NativeCounter, type DataSourceCollectMetric, type DataPointLabelValue, NativeHistogram, type INativeMetric } from '@quickstat/core'
+import {
+  DataPoint,
+  NativeCounter,
+  type DataSourceCollectMetric,
+  type DataPointLabelValue,
+  NativeHistogram,
+  type INativeMetric,
+  NativeGauge,
+} from '@quickstat/core'
 /**
  * The prometheus file generator which generates the prometheus file from the collected metrics.
  */
@@ -31,7 +39,7 @@ export class PromFileGenerator {
   getMetricSection(collectedMetric: DataSourceCollectMetric) {
     const { data, metric } = collectedMetric
 
-    if (metric instanceof Gauge) {
+    if (metric instanceof NativeGauge) {
       return this.getLinearMetricSection(data, metric, MetricNameSuffix.Total)
     } else if (metric instanceof NativeCounter) {
       return this.getLinearMetricSection(data, metric, MetricNameSuffix.Sum)
@@ -48,7 +56,7 @@ export class PromFileGenerator {
    * @param metric The metric
    * @param suffix The suffix for the metric name
    */
-  getLinearMetricSection(data: DataPoint, metric: NativeCounter | Gauge, suffix: MetricNameSuffix) {
+  getLinearMetricSection(data: DataPoint, metric: NativeCounter | NativeGauge, suffix: MetricNameSuffix) {
     const metricName = this.getSuffixedMetricName(metric.name, suffix)
     const lines = [
       ...this.getHeaderMetricSection(metricName, metric),
