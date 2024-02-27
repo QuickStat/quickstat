@@ -1,5 +1,6 @@
 import type { DataSource } from './datasources/DataSource'
 import type { INativeMetric, Metric } from './metrics/Metric'
+import { MetricsManager } from './metrics/MetricsManager'
 
 /**
  * The options for the client.
@@ -30,11 +31,13 @@ export class Client<D extends DataSource = DataSource> {
   /** The plugins to automatically collect the metrics from the application e.g. pm2, rest, etc. */
   plugins: any[]
   /** The different metrics which are collected and persisted. */
-  metrics: INativeMetric[]
+  metrics: MetricsManager;
   constructor(options: ClientOptions<D>) {
     this.dataSource = options.dataSource
     this.plugins = options.plugins
-    this.metrics = options.metrics
+    this.metrics = new MetricsManager();
+
+    this.registerMetrics(options.metrics);
   }
 
   /**
@@ -52,11 +55,11 @@ export class Client<D extends DataSource = DataSource> {
    * @param metric The metric to register
    */
   registerMetric(metric: INativeMetric) {
-    const hasMetric = this.metrics.find((m) => m.key === metric.key)
-    if (hasMetric) {
+    if (this.metrics.has(metric.key)) {
       throw new Error(`The metric with the key ${metric.key} has already been registered.`)
     }
-    this.metrics.push(metric)
+    
+    this.metrics.set(metric.key, metric)
   }
 
   /**

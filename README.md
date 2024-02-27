@@ -63,7 +63,7 @@ QuickStat follows a clear differentiation between various components within its 
 
 ### Metrics
 
-The provided Metrics adhere to the OpenMetrics Specification. The metric classes prefixed with "Native," such as NativeCounter, NativeGauge, and NativeHistogram, serve as the base classes for the user-friendly metric classes like SingleCounter and MultiCounter.
+The provided Metrics adhere to the OpenMetrics Specification. The metric classes prefixed with "Native," such as NativeCounter, NativeGauge, and NativeHistogram, serve as the base classes (internal use) for the user-friendly metric classes like SingleCounter and MultiCounter.
 
 | Metric              | Type      | Description                                                | Example                      | Usage                                  |
 | ------------------- | --------- | ---------------------------------------------------------- | ---------------------------- | -------------------------------------- |
@@ -100,7 +100,7 @@ Data sources play a crucial role in aggregating collected data from registered m
 
 | Data Source               | Description                                         | Strategies                         |
 | ------------------------- | --------------------------------------------------- | ---------------------------------- |
-| [@quickstat/prometheus]() | Convert the metrics to a Prometheus readable format | Scrape, Push Gateway, Remote Write |
+| [@quickstat/prometheus]() | Convert the metrics to a Prometheus readable format | Scrape and Push Gateway |
 
 ### Client
 

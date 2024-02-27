@@ -10,6 +10,8 @@ const quickStatClient = new QuickStatClient<PrometheusDataSource<PushGatewayStra
   plugins: [],
 })
 
+quickStatClient.metrics.get<MultiCounter>("requests").inc([]);
+
 const requestsCounter = new MultiCounter({
   name: 'requests',
   value: 0,

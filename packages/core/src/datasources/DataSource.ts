@@ -41,7 +41,7 @@ export class DataSource {
 
     const timestamp = Date.now()
 
-    const dataPoints = this.client.metrics.map(async (metric) => {
+    const dataPoints = [...this.client.metrics.values()].map(async (metric) => {
       return { data: await metric.collect(timestamp), metric }
     })
 
