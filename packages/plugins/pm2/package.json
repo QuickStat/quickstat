@@ -1,11 +1,11 @@
 {
-  "name": "@quickstat/core",
-  "version": "0.0.0",
-  "description": "Core",
+  "name": "@quickstat/pm2",
+  "version": "0.0.1",
+  "description": "Effortlessly monitor PM2 key metrics and export it to prometheus for visualizing it in Grafana",
   "repository": {
     "type": "git",
-    "url": "git://github.com/QuickStat/quickstat.git",
-    "directory": "packages/core"
+    "url": "git://https://github.com/QuickStat/quickstat.git",
+    "directory": "packages/plugins/pm2"
   },
   "license": "Apache-2.0",
   "author": "DxLoop",
@@ -38,6 +38,9 @@
     "test": "vitest --passWithNoTests",
     "typecheck": "tsc -p ./tsconfig.json --noEmit --emitDeclarationOnly false"
   },
+  "dependencies": {
+    "@quickstat/core": "workspace:*"
+  },
   "devDependencies": {
     "@quickstat/eslint-config": "workspace:*",
     "@quickstat/ts-config": "workspace:*",
@@ -56,18 +59,23 @@
     "registry": "https://registry.npmjs.org/"
   },
   "keywords": [
-    "core",
+    "pm2",
+    "process manager",
     "metrics",
     "monitor",
     "monitoring",
+    "performance",
+    "node.js",
+    "plugin",
     "track",
     "tracking",
-    "analytics",
     "stats",
     "statistics",
+    "analytics",
+    "resource utilization",
+    "data visualization",
     "dashboard",
-    "prometheus",
     "grafana",
-    "node.js"
+    "prometheus"
   ]
 }

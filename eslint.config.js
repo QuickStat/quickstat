@@ -22,7 +22,12 @@ export default [
       parserOptions: {
         ecmaVersion: 'latest',
         tsconfigRootDir: dirname(fileURLToPath(import.meta.url)),
-        project: ['./packages/*/tsconfig.json', './packages/config/*/tsconfig.json'],
+        project: [
+          './packages/*/tsconfig.json',
+          './packages/config/*/tsconfig.json',
+          './packages/datasources/*/tsconfig.json',
+          './packages/plugins/*/tsconfig.json',
+        ],
       },
     },
   },

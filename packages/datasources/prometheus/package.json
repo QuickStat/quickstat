@@ -1,6 +1,6 @@
 {
   "name": "@quickstat/prometheus",
-  "version": "2.3.0",
+  "version": "0.0.1",
   "description": "Prometheus datasource for QuickStat",
   "repository": {
     "type": "git",
@@ -57,5 +57,23 @@
   "publishConfig": {
     "access": "public",
     "registry": "https://registry.npmjs.org/"
-  }
+  },
+  "keywords": [
+    "prometheus",
+    "prom",
+    "prom-client",
+    "metrics",
+    "monitoring",
+    "data source",
+    "scraping",
+    "push gateway",
+    "remote write",
+    "time series",
+    "observability",
+    "alerting",
+    "visualization",
+    "dashboard",
+    "server monitoring",
+    "node.js"
+  ]
 }

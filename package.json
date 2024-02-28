@@ -8,6 +8,8 @@
   "workspaces": {
     "packages": [
       "packages/*",
+      "packages/datasources/*",
+      "packages/plugins/*",
       "packages/config/eslint-config/*",
       "packages/config/tsup-config/*",
       "packages/config/ts-config/*"

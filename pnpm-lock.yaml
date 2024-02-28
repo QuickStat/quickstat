@@ -163,6 +163,31 @@ importers:
         specifier: ^5.3.3
         version: 5.3.3
 
+  packages/datasources/prometheus:
+    dependencies:
+      '@quickstat/core':
+        specifier: workspace:*
+        version: link:../../core
+    devDependencies:
+      '@quickstat/eslint-config':
+        specifier: workspace:*
+        version: link:../../config/eslint-config
+      '@quickstat/ts-config':
+        specifier: workspace:*
+        version: link:../../config/ts-config
+      '@quickstat/tsup-config':
+        specifier: workspace:*
+        version: link:../../config/tsup-config
+      eslint:
+        specifier: ^8.55.0
+        version: 8.56.0
+      tsup:
+        specifier: ^8.0.1
+        version: 8.0.1(ts-node@10.9.2)(typescript@5.3.3)
+      typescript:
+        specifier: ^5.3.3
+        version: 5.3.3
+
   packages/demo:
     dependencies:
       '@quickstat/core':
@@ -170,7 +195,7 @@ importers:
         version: link:../core
       '@quickstat/prometheus':
         specifier: workspace:*
-        version: link:../prometheus
+        version: link:../datasources/prometheus
     devDependencies:
       '@quickstat/eslint-config':
         specifier: workspace:*
@@ -191,21 +216,21 @@ importers:
         specifier: ^5.3.3
         version: 5.3.3
 
-  packages/prometheus:
+  packages/plugins/pm2:
     dependencies:
       '@quickstat/core':
         specifier: workspace:*
-        version: link:../core
+        version: link:../../core
     devDependencies:
       '@quickstat/eslint-config':
         specifier: workspace:*
-        version: link:../config/eslint-config
+        version: link:../../config/eslint-config
       '@quickstat/ts-config':
         specifier: workspace:*
-        version: link:../config/ts-config
+        version: link:../../config/ts-config
       '@quickstat/tsup-config':
         specifier: workspace:*
-        version: link:../config/tsup-config
+        version: link:../../config/tsup-config
       eslint:
         specifier: ^8.55.0
         version: 8.56.0
