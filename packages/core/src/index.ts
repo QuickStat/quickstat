@@ -23,6 +23,9 @@ export * from './datapoints/DataPointManager.ts'
 // ### Data sources ###
 export * from './datasources/DataSource.ts'
 
+// ### Plugins ###
+export * from './plugins/Plugin.ts'
+
 // ### Shared ###
 export * from './shared/utils.ts'
 export * from './shared/types.ts'

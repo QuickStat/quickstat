@@ -98,8 +98,8 @@ We are continuously working on expanding our collection of plugins to cover more
 
 Data sources play a crucial role in aggregating collected data from registered metrics and persisting them or making them available for visualization in Grafana. QuickStat currently supports Prometheus with various strategies including scrape, push gateway, or remote write (WIP). However, there are plans to introduce additional data sources such as InfluxDB, PostgreSQL etc. in the future.
 
-| Data Source               | Description                                         | Strategies                         |
-| ------------------------- | --------------------------------------------------- | ---------------------------------- |
+| Data Source               | Description                                         | Strategies              |
+| ------------------------- | --------------------------------------------------- | ----------------------- |
 | [@quickstat/prometheus]() | Convert the metrics to a Prometheus readable format | Scrape and Push Gateway |
 
 ### Client

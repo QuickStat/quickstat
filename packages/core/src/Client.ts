@@ -1,6 +1,7 @@
 import type { DataSource } from './datasources/DataSource'
 import type { INativeMetric, Metric } from './metrics/Metric'
 import { MetricsManager } from './metrics/MetricsManager'
+import type { Plugin } from './plugins/Plugin'
 
 /**
  * The options for the client.
@@ -14,7 +15,7 @@ export interface ClientOptions<D extends DataSource = DataSource> {
   /**
    * The plugins to automatically collect the metrics from the application e.g. pm2, rest, etc.
    */
-  plugins: any[]
+  plugins: Plugin[]
   /**
    * The different metrics which are collected and persisted.
    */
@@ -29,15 +30,16 @@ export class Client<D extends DataSource = DataSource> {
   /** The data source to persist the metrics on e.g. prometheus, influxdb, etc. */
   dataSource?: D
   /** The plugins to automatically collect the metrics from the application e.g. pm2, rest, etc. */
-  plugins: any[]
+  plugins: Plugin[]
   /** The different metrics which are collected and persisted. */
-  metrics: MetricsManager;
+  metrics: MetricsManager
   constructor(options: ClientOptions<D>) {
     this.dataSource = options.dataSource
-    this.plugins = options.plugins
-    this.metrics = new MetricsManager();
+    this.plugins = []
+    this.metrics = new MetricsManager()
 
-    this.registerMetrics(options.metrics);
+    this.registerPlugins(options.plugins)
+    this.registerMetrics(options.metrics)
   }
 
   /**
@@ -58,8 +60,34 @@ export class Client<D extends DataSource = DataSource> {
     if (this.metrics.has(metric.key)) {
       throw new Error(`The metric with the key ${metric.key} has already been registered.`)
     }
-    
+
     this.metrics.set(metric.key, metric)
+  }
+
+  /**
+   * Register Plugins to the client.
+   * @param plugins The plugins to register
+   */
+  registerPlugins(plugins: Plugin[]) {
+    for (const plugin of plugins) {
+      this.registerPlugin(plugin)
+    }
+  }
+
+  /**
+   * Register a plugin to the client.
+   * @param plugin The plugin to register
+   */
+  registerPlugin(plugin: Plugin) {
+    if (plugin.client) {
+      throw new Error('The plugin has already been registered.')
+    } else if (!plugin.metrics) {
+      throw new Error('The plugin does not have any metrics to register.')
+    }
+
+    plugin.client = this
+    this.plugins.push(plugin)
+    this.registerMetrics(plugin.metrics)
   }
 
   /**
