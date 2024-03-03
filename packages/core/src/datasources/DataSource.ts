@@ -41,6 +41,11 @@ export class DataSource {
 
     const timestamp = Date.now()
 
+    // Call the before collect callback for the plugins so it can set data from other sources instead of individually setting it through onCollect
+    await Promise.all(
+      this.client.plugins.map(async (plugin) => plugin.onCollect(timestamp)),
+    )
+
     const dataPoints = [...this.client.metrics.values()].map(async (metric) => {
       return { data: await metric.collect(timestamp), metric }
     })

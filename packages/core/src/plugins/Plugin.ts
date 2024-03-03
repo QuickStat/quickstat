@@ -10,9 +10,9 @@ export interface PluginOptions {
   metrics: INativeMetric[]
 
   /**
-   * Remove following plugins from the metrics
+   * Remove following metrics with given key from the plugin
    */
-  removePlugins?: string[]
+  excludeMetrics?: string[]
 
   /**
    * The client to register the plugin to.
@@ -35,9 +35,9 @@ export class Plugin {
   metrics: INativeMetric[]
 
   /**
-   * Remove following plugins from the metrics
+   * Remove following metrics with given key from the plugin
    */
-  public removePlugins: string[] = []
+  public excludeMetrics: string[] = []
 
   /**
    * The constructor for constructing the plugin which holds the metrics.
@@ -45,10 +45,10 @@ export class Plugin {
    */
   constructor(options: PluginOptions) {
     this.metrics = options.metrics
-    this.removePlugins = options.removePlugins || []
+    this.excludeMetrics = options.excludeMetrics || []
     this.client = options.client
 
-    this.removeMetrics(this.removePlugins)
+    this.removeMetrics(this.excludeMetrics)
   }
 
   /**
@@ -65,5 +65,13 @@ export class Plugin {
    */
   public register(client: Client) {
     client.registerPlugin(this)
+  }
+
+  /**
+   * Collect the metrics from the plugin if they need to be collected from other sources.
+   * @param timestamp The timestamp to collect the metrics at
+   */
+  public async onCollect(timestamp: number) {
+    return null
   }
 }

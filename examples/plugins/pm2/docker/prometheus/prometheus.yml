@@ -6,11 +6,3 @@ scrape_configs:
       - targets: ['172.23.0.1:3242']
         labels:
           application: 'Quickstat'
-  - job_name: 'pushgateway'
-    metrics_path: /metrics
-    scheme: http
-    honor_labels: true
-    static_configs:
-      - targets: ['localhost:9091']
-        labels:
-          application: 'Quickstat'

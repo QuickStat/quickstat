@@ -40,6 +40,10 @@ export class Client<D extends DataSource = DataSource> {
 
     this.registerPlugins(options.plugins)
     this.registerMetrics(options.metrics)
+
+    if(this.dataSource) {
+      this.registerDataSource(this.dataSource)
+    }
   }
 
   /**
@@ -95,7 +99,7 @@ export class Client<D extends DataSource = DataSource> {
    * @param dataSource The data source to register
    */
   registerDataSource(dataSource: D = this.dataSource as D) {
-    if (this.dataSource) {
+    if (this.dataSource && this.dataSource.client) {
       throw new Error('The data source has already been registered.')
     } else if (!dataSource) {
       throw new Error('The data source is not defined.')
