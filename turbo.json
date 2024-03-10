@@ -1,0 +1,68 @@
+{
+    "$schema": "https://turbo.build/schema.json",
+    "pipeline": {
+        "build": {
+            "dependsOn": [
+                "^build"
+            ],
+            "outputs": [
+                "dist/**"
+            ]
+        },
+        "clean": {
+            "dependsOn": [
+                "^clean"
+            ],
+            "outputs": [],
+            "cache": false,
+            "outputMode": "new-only"
+        },
+        "start": {
+            "dependsOn": [
+                "^wait"
+            ],
+            "outputs": [
+                "dist/**"
+            ],
+            "cache": false,
+            "persistent": true
+        },
+        "wait": {
+            "cache": false
+        },
+        "test": {
+            "dependsOn": [],
+            "outputs": [
+                "coverage/**"
+            ]
+        },
+        "lint": {
+            "outputs": [],
+            "cache": false
+        },
+        "lint-fix": {
+            "outputs": [
+                "src/**"
+            ],
+            "cache": false,
+            "outputMode": "new-only"
+        },
+        "typecheck": {
+            "dependsOn": [
+                "^build"
+            ]
+        },
+        "release": {
+            "dependsOn": [
+                "build"
+            ],
+            "outputs": []
+        },
+        "release:canary": {
+            "dependsOn": [
+                "build"
+            ],
+            "outputs": []
+        }
+    }
+}
