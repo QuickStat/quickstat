@@ -36,4 +36,4 @@ http.createServer(async (req, res) => {
 // IMPORTANT: The following code below is just for demonstration purposes -> spins up some pm2 processes
 new DemoProcessManager().start()
 
-// @TODO Live Stats , by reload every 3s or range?
+// @TODO Live Stats , by reload every 3s or range? -> Change Grafana JSON
