@@ -41,7 +41,7 @@ export class Client<D extends DataSource = DataSource> {
     this.registerPlugins(options.plugins)
     this.registerMetrics(options.metrics)
 
-    if(this.dataSource) {
+    if (this.dataSource) {
       this.registerDataSource(this.dataSource)
     }
   }

@@ -8,7 +8,7 @@ export const PM2_BASE_LABELS = {
    * label: mapping path to the pm2 list data
    */
   'name': createValueMapping(['name']),
-/*   'pid': createValueMapping(['pid']), */
+  /*   'pid': createValueMapping(['pid']), */
   'pm2_id': createValueMapping(['pm_id']),
 }
 
@@ -16,7 +16,7 @@ export const PM2_BASE_LABELS = {
  * The available metrics for the pm2 plugin
  */
 export type PM2_AVAILABLE_METRICS =
- /*  | 'pm2_data' */
+  /*  | 'pm2_data' */
   | 'pm2_unstable_restarts'
   | 'pm2_restart_time'
   | 'pm2_uptime'
@@ -38,7 +38,7 @@ export type PM2_AVAILABLE_METRICS =
  * Contains the metadata and the mapping for the metrics to the pm2 raw list data
  */
 export const PM2_METRICS_RAW = [
-/*   {
+  /*   {
     // Contains all the data from pm2 for list view
     key: 'pm2_data',
     type: NativeMetricTypes.Counter,
@@ -141,7 +141,7 @@ export const PM2_METRICS_RAW = [
     description: '95th percentile of event loop latency (in milliseconds)',
     labels: PM2_BASE_LABELS,
     value: createValueMapping(['pm2_env', 'axm_monitor', 'Event Loop Latency p95'], true),
-/*     buckets: [0.1, 0.3, 1.2, 5.0], */
+    /*     buckets: [0.1, 0.3, 1.2, 5.0], */
   },
   {
     key: 'pm2_event_loop_latency',
@@ -149,7 +149,7 @@ export const PM2_METRICS_RAW = [
     description: '50th percentile of event loop latency (in milliseconds)',
     labels: PM2_BASE_LABELS,
     value: createValueMapping(['pm2_env', 'axm_monitor', 'Event Loop Latency'], true),
-  /*   buckets: [0.1, 0.3, 1.2, 5.0], */
+    /*   buckets: [0.1, 0.3, 1.2, 5.0], */
   },
   {
     key: 'pm2_active_handles',
@@ -178,7 +178,7 @@ export const PM2_METRICS_RAW = [
     description: '95th percentile of HTTP latency (in milliseconds)',
     labels: PM2_BASE_LABELS,
     value: createValueMapping(['pm2_env', 'axm_monitor', 'HTTP P95 Latency'], true),
-/*     buckets: [0.1, 0.3, 1.2, 5.0], */
+    /*     buckets: [0.1, 0.3, 1.2, 5.0], */
   },
   {
     key: 'pm2_http_latency_mean',
@@ -186,7 +186,7 @@ export const PM2_METRICS_RAW = [
     description: 'Mean HTTP latency (in milliseconds)',
     labels: PM2_BASE_LABELS,
     value: createValueMapping(['pm2_env', 'axm_monitor', 'HTTP Mean Latency'], true),
- /*    buckets: [0.1, 0.3, 1.2, 5.0], */
+    /*    buckets: [0.1, 0.3, 1.2, 5.0], */
   },
 ]
 

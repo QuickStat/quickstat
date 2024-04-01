@@ -49,7 +49,7 @@ export class Metric<T> {
     this.description = options.description
     this.labels = options.labels ? options.labels.map(normalizeLabelName) : []
     // @TODO Check whether this required this.name + (this.labels.length > 0 ? `{${this.labels.join(',')}}` : '')
-    this.key = this.name; //+ (this.labels.length > 0 ? `{${this.labels.join(',')}}` : '')
+    this.key = this.name // + (this.labels.length > 0 ? `{${this.labels.join(',')}}` : '')
     this.onCollect = options.onCollect
     this.afterCollect = options.afterCollect
     this.dataPoints = new DataPointManager()

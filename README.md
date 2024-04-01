@@ -84,13 +84,13 @@ When you add a plugin to your QuickStat client, it begins collecting metrics aft
 
 Each plugin comes with various configuration options, and by following the hyperlink associated with each plugin, you can find examples of how to use them. Additionally, the plugins provide templates for Grafana dashboards, which can be located in the examples section.
 
-| Plugin                    | Description                        | Example Metrics                                |
-| ------------------------- | ---------------------------------- | ---------------------------------------------- |
-| [@quickstat/pm2]()        | Provides metrics for PM2 instances | CPU, Memory, Process metrics etc.              |
-| [@quickstat/rest]()       | Provides metrics for REST services | Request count, Response time, Error count etc. |
-| [@quickstat/express.js]() | Provides metrics for Express.js    | Request count, Response time, Error count etc. |
-| [@quickstat/fastify]()    | Provides metrics for Fastify       | Request count, Response time, Error count etc. |
-| [@quickstat/node.js]()    | Provides metrics for Node.js       | Event loop delay, Memory usage, CPU usage etc. |
+| Plugin                                                          | Description                        | Example Metrics                                |
+| --------------------------------------------------------------- | ---------------------------------- | ---------------------------------------------- |
+| [@quickstat/pm2](./packages/plugins/pm2/README.md)              | Provides metrics for PM2 instances | CPU, Memory, Process metrics etc.              |
+| [@quickstat/rest](./packages/plugins/rest/README.md)            | Provides metrics for REST services | Request count, Response time, Error count etc. |
+| [@quickstat/express.js](./packages/plugins/expressjs/README.md) | Provides metrics for Express.js    | Request count, Response time, Error count etc. |
+| [@quickstat/fastify]()                                          | Provides metrics for Fastify       | Request count, Response time, Error count etc. |
+| [@quickstat/node.js]()                                          | Provides metrics for Node.js       | Event loop delay, Memory usage, CPU usage etc. |
 
 We are continuously working on expanding our collection of plugins to cover more libraries and services. If you have any suggestions for new plugins or would like to contribute your own plugin, feel free to open an issue on our GitHub repository or submit a pull request.
 

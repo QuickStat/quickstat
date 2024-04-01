@@ -7,7 +7,6 @@ export function normalizeLabelName(name: string): Lowercase<string> {
   return name.toLowerCase().replace(/[^a-z0-9]/g, '_') as Lowercase<string>
 }
 
-
 export function getMetricKey(name: string, labels: string[]) {
   return name + (labels.length > 0 ? `{${labels.join(',')}}` : '')
 }

@@ -85,13 +85,13 @@ export class Pm2Plugin extends Plugin {
 
     switch (metric?.type) {
       case 'counter':
-        (metric as MultiCounter).set(labels, value)
+        ;(metric as MultiCounter).set(labels, value)
         break
       case 'gauge':
-        (metric as MultiGauge).set(labels, value)
+        ;(metric as MultiGauge).set(labels, value)
         break
       case 'histogram':
-        (metric as MultiHistogram).observe(labels, value)
+        ;(metric as MultiHistogram).observe(labels, value)
         break
       default:
         break

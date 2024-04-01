@@ -4,17 +4,17 @@
  * Allocates random memory
  */
 function allocateRandomMemory() {
-    const size = Math.floor(Math.random() * 1000000); // Random size up to 1MB
-    const arr = new Array(size).fill('x'); // Allocate memory
-    console.log(`Allocated ${size} bytes of memory`);
-    return arr;
+  const size = Math.floor(Math.random() * 1000000) // Random size up to 1MB
+  const arr = new Array(size).fill('x') // Allocate memory
+  console.log(`Allocated ${size} bytes of memory`)
+  return arr
 }
 
 /**
  * Crash with an unsafe exit code
  */
 function crash() {
-    process.exit(5);
+  process.exit(5)
 }
 
 /**
@@ -22,17 +22,17 @@ function crash() {
  * and the process will eventually crash
  */
 function main(): void {
-    let crashAfterIterations = Math.random() * 100;
+  let crashAfterIterations = Math.random() * 100
 
-    setInterval(() => {
-        const res = allocateRandomMemory();
-        console.log('Memory allocated', res.length);
-        crashAfterIterations--;
+  setInterval(() => {
+    const res = allocateRandomMemory()
+    console.log('Memory allocated', res.length)
+    crashAfterIterations--
 
-        if (crashAfterIterations <= 0) {
-            //crash();
-        }
-    }, 2000); // Allocate every 2 seconds
+    if (crashAfterIterations <= 0) {
+      // crash();
+    }
+  }, 2000) // Allocate every 2 seconds
 }
 
-main();
+main()

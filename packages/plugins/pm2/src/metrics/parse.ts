@@ -21,7 +21,6 @@ export function getValueFromRawMetricWithMapping(data: pm2.ProcessDescription, m
   // @ts-ignore
   const value: number | { unit: string; value: number | string } = _value
 
-
   if (mapper.withUnit && typeof value === 'object') {
     return convertValueWithUnit(value.value, value.unit) ?? 0
   } else {
@@ -36,15 +35,15 @@ export function getValueFromRawMetricWithMapping(data: pm2.ProcessDescription, m
  */
 function getValue(value: string | number) {
   if (typeof value === 'string') {
-    if (value == "online") {
-      value = 1;
-    } else if (value == "stopped") {
-      value = 0;
+    if (value == 'online') {
+      value = 1
+    } else if (value == 'stopped') {
+      value = 0
     } else {
-      value = isNaN(Number(value)) ? value : Number(value);
+      value = isNaN(Number(value)) ? value : Number(value)
     }
   }
-  return value ?? 0;
+  return value ?? 0
 }
 
 /**
@@ -54,7 +53,7 @@ function getValue(value: string | number) {
  * @returns
  */
 function convertValueWithUnit(value: number | string, unit: string) {
-  value = getValue(value) as number;
+  value = getValue(value) as number
   unit = (unit || '').replace('req/', '').toUpperCase()
   switch (unit) {
     case 'KB':
@@ -90,7 +89,7 @@ function convertValueWithUnit(value: number | string, unit: string) {
     case 'Y':
       return value * 1000 * 60 * 60 * 24 * 365
     case '%':
-      return value/100
+      return value / 100
     default:
       return value
   }
