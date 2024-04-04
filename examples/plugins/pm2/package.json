@@ -46,8 +46,8 @@
   },
   "devDependencies": {
     "@quickstat/eslint-config": "workspace:*",
-    "eslint": "^8.55.0",
-    "typescript": "^5.3.3"
+    "eslint": "^8.57.0",
+    "typescript": "^5.4.3"
   },
   "packageManager": "pnpm@8.3.0",
   "engines": {
