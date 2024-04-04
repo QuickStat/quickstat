@@ -34,10 +34,19 @@ export type PM2_AVAILABLE_METRICS =
   | 'pm2_http_latency_p95'
   | 'pm2_http_latency_mean'
 
+export interface Pm2RawMetricType {
+  key: string
+  type: NativeMetricTypes
+  description: string
+  labels: typeof PM2_BASE_LABELS
+  value: ReturnType<typeof createValueMapping>
+  buckets?: number[]
+}
+
 /**
  * Contains the metadata and the mapping for the metrics to the pm2 raw list data
  */
-export const PM2_METRICS_RAW = [
+export const PM2_METRICS_RAW: Pm2RawMetricType[] = [
   /*   {
     // Contains all the data from pm2 for list view
     key: 'pm2_data',

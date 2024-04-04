@@ -35,9 +35,7 @@ export function createPm2Metrics(data: typeof PM2_METRICS_RAW) {
         metrics.push(
           new MultiHistogram({
             ...sharedOptions,
-            // The buckets for the histogram
-            // @TODO Remove buckets since not metric type uses it
-            // @ts-ignore
+            // The buckets for the histogram (if provided, otherwise default buckets are used)
             buckets: metric.buckets as number[] ?? [0.1, 0.3, 1.2, 5.0],
           }),
         )
