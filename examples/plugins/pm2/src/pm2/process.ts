@@ -3,7 +3,7 @@
 /**
  * Allocates random memory
  */
-function allocateRandomMemory() {
+export function allocateRandomMemory() {
   const size = Math.floor(Math.random() * 1000000) // Random size up to 1MB
   const arr = new Array(size).fill('x') // Allocate memory
   console.log(`Allocated ${size} bytes of memory`)
@@ -13,10 +13,10 @@ function allocateRandomMemory() {
 /**
  * Crash with an unsafe exit code
  */
-function crash() {
+/* function crash() {
   process.exit(5)
 }
-
+ */
 /**
  * Calls allocateRandomMemory every 2 seconds, gc will deallocate the memory
  * and the process will eventually crash
