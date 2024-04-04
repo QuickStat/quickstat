@@ -59,10 +59,10 @@ export class MetricsManager extends Map<string, MetricTypes> {
    */
   override delete(metricName: string): boolean {
     const existingMetric = this.get(metricName)
-    if (existingMetric && 'interval' in existingMetric) {
-      // @TODO move clear logic to metric class
-      // @ts-ignore
-      clearInterval(existingMetric.interval)
+
+    // When metric exists, interval has to be detached and data points cleared
+    if (existingMetric) {
+      existingMetric._clear()
     }
 
     return super.delete(metricName)

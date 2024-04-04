@@ -81,10 +81,20 @@ export class Metric<T> {
   }
 
   /**
+   * Validate that the given labels equals the metric labels.
+   * @param labels The labels to validate
+   */
+  protected validateLabels(labels: string[]) {
+    if (labels.length !== this.labels.length) {
+      throw new Error('The number of labels does not match the number of label names.')
+    }
+  }
+
+  /**
    * Calls the collect callback.
    * @param instance The instance of the metric
    */
-  async executeOnCollect(instance: T): Promise<void> {
+  public async executeOnCollect(instance: T): Promise<void> {
     await this.onCollect?.(instance)
   }
 
@@ -92,7 +102,7 @@ export class Metric<T> {
    * Calls the after collect callback.
    * @param instance The instance of the metric
    */
-  async executeAfterCollect(instance: T): Promise<void> {
+  public async executeAfterCollect(instance: T): Promise<void> {
     if (this.afterCollect) {
       await this.afterCollect(instance)
     } else {
@@ -101,13 +111,10 @@ export class Metric<T> {
   }
 
   /**
-   * Validate that the given labels equals the metric labels.
-   * @param labels The labels to validate
+   * Function called by metrics manager to remove intervals and properly detach the metric for deletion.
    */
-  protected validateLabels(labels: string[]) {
-    if (labels.length !== this.labels.length) {
-      throw new Error('The number of labels does not match the number of label names.')
-    }
+  public _clear() {
+    this.dataPoints.clear()
   }
 }
 

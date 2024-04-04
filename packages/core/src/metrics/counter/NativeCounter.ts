@@ -112,6 +112,31 @@ export class NativeCounter extends Metric<NativeCounter> implements INativeMetri
   }
 
   /**
+   * Snapshot the current value and values of the counter to the data points manager.
+   * @param timestamp The timestamp of the data point
+   * @param createdOnCollect Whether the data point has been created on collect
+   */
+  protected snapshot(timestamp: number = Date.now(), createdOnCollect: boolean = false): DataPoint {
+    const dataPoint = DataPoint.from({ timestamp, value: this.value, values: this.values, createdOnCollect })
+    this.dataPoints.add(dataPoint)
+    return dataPoint
+  }
+
+  /**
+   * Increment the counter by the given value.
+   * @param value The value to increment the counter by
+   */
+  protected validateOptions() {
+    if (this.value < 0) {
+      throw new Error('The value of the counter cannot be negative.')
+    }
+
+    if (this.resetOption?.interval != -1 && this.resetOption?.interval < 1) {
+      throw new Error('The interval of the counter reset must be bigger than 0.')
+    }
+  }
+
+  /**
    * Collect the counter metric.
    * @param timestamp The timestamp of the data point
    */
@@ -130,17 +155,11 @@ export class NativeCounter extends Metric<NativeCounter> implements INativeMetri
   }
 
   /**
-   * Increment the counter by the given value.
-   * @param value The value to increment the counter by
+   * Function called by metrics manager to remove intervals and properly detach the metric for deletion.
    */
-  protected validateOptions() {
-    if (this.value < 0) {
-      throw new Error('The value of the counter cannot be negative.')
-    }
-
-    if (this.resetOption?.interval != -1 && this.resetOption?.interval < 1) {
-      throw new Error('The interval of the counter reset must be bigger than 0.')
-    }
+  public _clear() {
+    super._clear()
+    clearInterval(this.interval)
   }
 
   /**
@@ -149,17 +168,6 @@ export class NativeCounter extends Metric<NativeCounter> implements INativeMetri
    */
   public register(client: Client) {
     client.registerMetric(this)
-  }
-
-  /**
-   * Snapshot the current value and values of the counter to the data points manager.
-   * @param timestamp The timestamp of the data point
-   * @param createdOnCollect Whether the data point has been created on collect
-   */
-  protected snapshot(timestamp: number = Date.now(), createdOnCollect: boolean = false): DataPoint {
-    const dataPoint = DataPoint.from({ timestamp, value: this.value, values: this.values, createdOnCollect })
-    this.dataPoints.add(dataPoint)
-    return dataPoint
   }
 
   /**

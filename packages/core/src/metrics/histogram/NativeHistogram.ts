@@ -144,7 +144,7 @@ export class NativeHistogram extends Metric<NativeHistogram> implements INativeM
    * Collect the histogram metric.
    * @param timestamp The timestamp of the data point
    */
-  async collect(timestamp: number = Date.now()): Promise<DataPoint> {
+  public async collect(timestamp: number = Date.now()): Promise<DataPoint> {
     await super.executeOnCollect(this)
     const dataPoint = this.snapshot(timestamp, true) // Snapshot the current value and values of the histogram to the data points manager
     await super.executeAfterCollect(this)
@@ -154,7 +154,7 @@ export class NativeHistogram extends Metric<NativeHistogram> implements INativeM
   /**
    * Reset the histogram with the custom provided function or the default one.
    */
-  reset() {
+  public reset() {
     return this.resetOption.values(this)
   }
 
@@ -169,14 +169,6 @@ export class NativeHistogram extends Metric<NativeHistogram> implements INativeM
   }
 
   /**
-   * Register histogram to the client.
-   * @param client The client to register the histogram to
-   */
-  public register(client: Client) {
-    client.registerMetric(this)
-  }
-
-  /**
    * Snapshot the current value and values of the histogram to the data points manager.
    * @param timestamp The timestamp of the data point
    * @param createdOnCollect Whether the data point has been created on collect
@@ -185,6 +177,22 @@ export class NativeHistogram extends Metric<NativeHistogram> implements INativeM
     const dataPoint = DataPoint.from({ timestamp, value: this.value, values: this.values, createdOnCollect })
     this.dataPoints.add(dataPoint)
     return dataPoint
+  }
+
+  /**
+   * Register histogram to the client.
+   * @param client The client to register the histogram to
+   */
+  public register(client: Client) {
+    client.registerMetric(this)
+  }
+
+  /**
+   * Function called by metrics manager to remove intervals and properly detach the metric for deletion.
+   */
+  public _clear() {
+    super._clear()
+    clearInterval(this.interval)
   }
 
   /**
