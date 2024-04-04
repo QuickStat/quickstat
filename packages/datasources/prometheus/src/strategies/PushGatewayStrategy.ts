@@ -17,12 +17,16 @@
  *  limitations under the License.
  */
 
-import * as url from 'node:url'
 import * as http from 'node:http'
 import * as https from 'node:https'
+import * as url from 'node:url'
 import { gzipSync } from 'node:zlib'
-import { BaseStrategy, type BaseStrategyOptions } from './BaseStrategy'
+
 import { PromFileGenerator } from 'src'
+
+import { BaseStrategy } from './BaseStrategy'
+
+import type { BaseStrategyOptions } from './BaseStrategy'
 
 /** The options for the push gateway strategy */
 export interface PushGatewayStrategyOptions extends BaseStrategyOptions {

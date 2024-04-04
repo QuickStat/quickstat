@@ -62,7 +62,7 @@ export class DataPointManager {
    * Map the data points from the data point manager.
    * @param callback The callback to map the data points
    */
-  map(callback: (dataPoint: DataPoint) => any) {
+  map<T>(callback: (dataPoint: DataPoint) => T[]) {
     return Array.from(this.dataPoints.values()).map(callback)
   }
 }

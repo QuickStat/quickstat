@@ -1,4 +1,6 @@
-import { NativeCounter, type NativeCounterOptions } from './NativeCounter'
+import { NativeCounter } from './NativeCounter'
+
+import type { NativeCounterOptions } from './NativeCounter'
 
 /** The options for the single counter */
 export type SingleCounterOptions = Omit<NativeCounterOptions, 'labels' | 'values'>

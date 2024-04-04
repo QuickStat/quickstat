@@ -1,4 +1,6 @@
-import { BaseStrategy, type BaseStrategyOptions } from './BaseStrategy'
+import { BaseStrategy } from './BaseStrategy'
+
+import type { BaseStrategyOptions } from './BaseStrategy'
 
 /**
  * The options for the remote write strategy

@@ -71,7 +71,7 @@ export class Plugin {
    * Collect the metrics from the plugin if they need to be collected from other sources.
    * @param timestamp The timestamp to collect the metrics at
    */
-  public async onCollect(timestamp: number) {
+  public async onCollect(_timestamp: number) {
     return null
   }
 }

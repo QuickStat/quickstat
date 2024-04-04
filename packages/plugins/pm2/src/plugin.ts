@@ -1,8 +1,13 @@
-import { MultiCounter, MultiGauge, MultiHistogram, NativeCounter, NativeGauge, Plugin } from '@quickstat/core'
-import { createValueMapping, PM2_METRICS_RAW, type PM2_AVAILABLE_METRICS } from './metrics/metrics'
-import { PM2_METRICS } from './metrics/shared'
-import type pm2 from 'pm2'
+import { Plugin } from '@quickstat/core'
+
+import { PM2_METRICS_RAW } from './metrics/metrics'
 import { getValueFromRawMetricWithMapping } from './metrics/parse'
+import { PM2_METRICS } from './metrics/shared'
+
+import type { MultiCounter, MultiGauge, MultiHistogram } from '@quickstat/core'
+import type pm2 from 'pm2'
+import type { createValueMapping } from './metrics/metrics'
+import type { PM2_AVAILABLE_METRICS } from './metrics/metrics'
 
 /**
  * The options for the pm2 plugin.
@@ -84,12 +89,15 @@ export class Pm2Plugin extends Plugin {
     const metric = this.client?.metrics.get(metricName)
 
     switch (metric?.type) {
+      // eslint-disable-next-line @typescript-eslint/no-unsafe-enum-comparison
       case 'counter':
         ;(metric as MultiCounter).set(labels, value)
         break
+      // eslint-disable-next-line @typescript-eslint/no-unsafe-enum-comparison
       case 'gauge':
         ;(metric as MultiGauge).set(labels, value)
         break
+      // eslint-disable-next-line @typescript-eslint/no-unsafe-enum-comparison
       case 'histogram':
         ;(metric as MultiHistogram).observe(labels, value)
         break

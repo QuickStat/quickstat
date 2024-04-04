@@ -1,6 +1,8 @@
-import type { PrometheusDataSource } from 'src/PrometheusDataSource'
-import { BaseStrategy, type BaseStrategyOptions } from './BaseStrategy'
 import { PromFileGenerator } from 'src'
+
+import { BaseStrategy } from './BaseStrategy'
+
+import type { BaseStrategyOptions } from './BaseStrategy'
 
 /**
  * The options for the scrape strategy

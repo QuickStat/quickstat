@@ -1,4 +1,3 @@
-import type { INativeMetric } from './Metric'
 import type { MultiCounter } from './counter/MultiCounter'
 import type { NativeCounter } from './counter/NativeCounter'
 import type { SingleCounter } from './counter/SingleCounter'
@@ -8,6 +7,7 @@ import type { SingleGauge } from './gauge/SingleGauge'
 import type { MultiHistogram } from './histogram/MultiHistogram'
 import type { NativeHistogram } from './histogram/NativeHistogram'
 import type { SingleHistogram } from './histogram/SingleHistogram'
+import type { INativeMetric } from './Metric'
 
 type MetricTypes =
   | INativeMetric

@@ -1,12 +1,13 @@
 import {
-  DataPoint,
   NativeCounter,
-  type DataSourceCollectMetric,
-  type DataPointLabelValue,
-  NativeHistogram,
-  type INativeMetric,
   NativeGauge,
+  NativeHistogram,
 } from '@quickstat/core'
+
+import type {
+  DataPoint,
+} from '@quickstat/core'
+import type { DataPointLabelValue, DataSourceCollectMetric, INativeMetric } from '@quickstat/core'
 /**
  * The prometheus file generator which generates the prometheus file from the collected metrics.
  */

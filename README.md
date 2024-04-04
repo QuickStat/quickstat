@@ -126,7 +126,7 @@ We are continuously working on improving QuickStat and adding new features to ma
   - Summary: A metric that can be used to observe values with quantiles.
   - Untyped: A metric that can be used to observe values without any specific type.
 - **Plugins:**
-  - Websocket: A plugin that provides metrics for Websocket services.
+  - WebSocket: A plugin that provides metrics for WebSocket services.
   - Axios/Fetch: A plugin that provides metrics for Axios and Fetch libraries.
   - Worker Threads/Child Processes: A plugin that provides metrics for Worker Threads and Child Processes.
 - **Data Sources:**

@@ -1,4 +1,6 @@
-import { NativeGauge, type NativeGaugeOptions } from './NativeGauge'
+import { NativeGauge } from './NativeGauge'
+
+import type { NativeGaugeOptions } from './NativeGauge'
 
 /** The options for the single gauge */
 export type SingleGaugeOptions = Omit<NativeGaugeOptions, 'labels' | 'values'>

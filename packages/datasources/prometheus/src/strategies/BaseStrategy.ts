@@ -20,7 +20,7 @@ export class BaseStrategy<ST extends BaseStrategy<ST>> {
    * The constructor for the base strategy
    * @param options The options for the base strategy
    */
-  constructor(options: BaseStrategyOptions = {}) {
+  constructor(_options: BaseStrategyOptions = {}) {
   }
 
   /**

@@ -1,7 +1,11 @@
-import { Metric, type INativeMetric, type MetricOptions } from '../Metric'
-import { DataPoint, type DataPointLabelValue } from 'src/datapoints/DataPoint'
-import type { Client } from 'src/Client'
 import { NativeMetricTypes } from 'src'
+import { DataPoint } from 'src/datapoints/DataPoint'
+
+import { Metric } from '../Metric'
+
+import type { Client } from 'src/Client'
+import type { DataPointLabelValue } from 'src/datapoints/DataPoint'
+import type { INativeMetric, MetricOptions } from '../Metric'
 
 /**
  * The options for the histogram metric.

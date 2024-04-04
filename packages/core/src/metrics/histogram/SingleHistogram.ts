@@ -1,4 +1,6 @@
-import { NativeHistogram, type NativeHistogramOptions } from './NativeHistogram'
+import { NativeHistogram } from './NativeHistogram'
+
+import type { NativeHistogramOptions } from './NativeHistogram'
 
 /** The options for the single histogram */
 export type SingleHistogramOptions = Omit<NativeHistogramOptions, 'labels' | 'values'>

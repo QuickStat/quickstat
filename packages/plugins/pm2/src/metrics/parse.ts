@@ -14,11 +14,12 @@ export function getValueFromRawMetricWithMapping(data: pm2.ProcessDescription, m
 
   // Iterate through mapping to get the value
   for (const key of mapper.mapping) {
-    // @ts-ignore
+    // @ts-expect-error Nested pm2 object -> key used to go to the value
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
     _value = _value?.[key]
   }
 
-  // @ts-ignore
+  // @ts-expect-error After value has been reached, it can be either be a atomic value or contain a unit
   const value: number | { unit: string; value: number | string } = _value
 
   if (mapper.withUnit && typeof value === 'object') {

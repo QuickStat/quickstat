@@ -1,4 +1,6 @@
-import { NativeGauge, type NativeGaugeOptions } from './NativeGauge'
+import { NativeGauge } from './NativeGauge'
+
+import type { NativeGaugeOptions } from './NativeGauge'
 
 /**
  * The options for the multi gauge with labels

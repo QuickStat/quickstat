@@ -7,7 +7,7 @@ export const rules = {
    */
   '@typescript-eslint/no-unused-vars': ['warn', { vars: 'all', varsIgnorePattern: '^_', args: 'after-used', argsIgnorePattern: '^_' }],
   '@typescript-eslint/no-var-requires': 'off',
-  '@typescript-eslint/explicit-module-boundary-types': 'warn',
+  '@typescript-eslint/explicit-module-boundary-types': 'off',
   // type imports should be imported as types
   '@typescript-eslint/consistent-type-imports': [
     'error',

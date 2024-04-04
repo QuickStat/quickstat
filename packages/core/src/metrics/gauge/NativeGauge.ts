@@ -1,4 +1,6 @@
-import { NativeCounter, type NativeCounterOptions } from '../counter/NativeCounter'
+import { NativeCounter } from '../counter/NativeCounter'
+
+import type { NativeCounterOptions } from '../counter/NativeCounter'
 
 /** The options for the native gauge */
 export type NativeGaugeOptions = NativeCounterOptions

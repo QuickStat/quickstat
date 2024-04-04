@@ -1,4 +1,6 @@
-import { NativeHistogram, type NativeHistogramOptions } from './NativeHistogram'
+import { NativeHistogram } from './NativeHistogram'
+
+import type { NativeHistogramOptions } from './NativeHistogram'
 
 /** The options for the multi histogram */
 export type MultiHistogramOptions = NativeHistogramOptions

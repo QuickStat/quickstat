@@ -1,6 +1,7 @@
-import type { DataSource } from './datasources/DataSource'
-import type { INativeMetric, Metric } from './metrics/Metric'
 import { MetricsManager } from './metrics/MetricsManager'
+
+import type { DataSource } from './datasources/DataSource'
+import type { INativeMetric } from './metrics/Metric'
 import type { Plugin } from './plugins/Plugin'
 
 /**
