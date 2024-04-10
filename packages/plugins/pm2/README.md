@@ -4,6 +4,9 @@ The QuickStat PM2 Plugin offers seamless integration with PM2 instances, allowin
 
 If you are new to QuickStat and its component, feel free to check the [official documentation](https://www.npmjs.com/package/@quickstat/core) for a detailed breakdown.
 
+![](../../../examples/plugins/pm2/assets/pm2_grafana_all_table.png)
+![](../../../examples/plugins/pm2/assets/pm2_grafana_all_single.png)
+
 ## Installation
 
 Start by installing the QuickStat core package, the data source used by grafana and then the PM2 plugin:
@@ -32,7 +35,7 @@ If you want to set up Prometheus and Grafana manually, follow the steps below:
 
 ### 2. Import Dashboard to Grafana
 
-Once Prometheus and Grafana are set up, you can add [following Dashboard](). Navigate to the Grafana dashboard page, click on "Import" and paste the dashboard template URL. Then, customize the dashboard as needed.
+Once Prometheus and Grafana are set up, you can add [following Dashboard](https://grafana.com/grafana/dashboards/20864). Navigate to the Grafana dashboard page, click on "Import" and paste the dashboard template URL. Then, customize the dashboard as needed.
 
 ### 3. Expose PM2 Metrics
 
