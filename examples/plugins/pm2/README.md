@@ -1,5 +1,5 @@
 # PM2 Plugin Example
-To quickly set up and run the PM2 Plugin example, follow these steps:
+To quickly set up and run the PM2 Plugin example, follow the steps below.
 
 ## Grafana Dashboard
 The dashboard is located under `./docker/grafana/provisioning/dashboards/pm2.json`, which also has been published to [Grafana's Dashboard Hub](https://grafana.com/grafana/dashboards/20864).
