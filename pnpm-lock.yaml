@@ -241,6 +241,31 @@ importers:
         specifier: ^5.4.3
         version: 5.4.3
 
+  packages/plugins/rest:
+    dependencies:
+      '@quickstat/core':
+        specifier: workspace:*
+        version: link:../../core
+    devDependencies:
+      '@quickstat/eslint-config':
+        specifier: workspace:*
+        version: link:../../config/eslint-config
+      '@quickstat/ts-config':
+        specifier: workspace:*
+        version: link:../../config/ts-config
+      '@quickstat/tsup-config':
+        specifier: workspace:*
+        version: link:../../config/tsup-config
+      eslint:
+        specifier: ^8.57.0
+        version: 8.57.0
+      tsup:
+        specifier: ^8.0.2
+        version: 8.0.2(ts-node@10.9.2)(typescript@5.4.3)
+      typescript:
+        specifier: ^5.4.3
+        version: 5.4.3
+
 packages:
 
   /@aashutoshrathi/word-wrap@1.2.6:
