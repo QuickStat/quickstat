@@ -1,6 +1,6 @@
 # PM2 Plugin Example
 
-To quickly set up and run the PM2 Plugin example, follow these steps:
+To quickly set up and run the PM2 Plugin example, follow the steps below.
 
 ## Grafana Dashboard
 
