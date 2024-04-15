@@ -1,14 +1,13 @@
-import { NativeMetricTypes } from '@quickstat/core'
+import type { RawMetricType } from '@quickstat/core'
+import { NativeMetricTypes, createInstanceFromRawMetric, getLabelsFromRecord } from '@quickstat/core'
 
 /**
  * The base labels for the pm2 metrics
  */
 export const PM2_BASE_LABELS = {
-  /**
-   * label: mapping path to the pm2 list data
-   */
+  /* label: mapping path to the pm2 list data */
   'name': createValueMapping(['name']),
-  /*   'pid': createValueMapping(['pid']), */
+  /* 'pid': createValueMapping(['pid']), */
   'pm2_id': createValueMapping(['pm_id']),
 }
 
@@ -34,13 +33,14 @@ export type PM2_AVAILABLE_METRICS =
   | 'pm2_http_latency_p95'
   | 'pm2_http_latency_mean'
 
-export interface Pm2RawMetricType {
-  key: string
-  type: NativeMetricTypes
-  description: string
+/**
+ * The raw metric type for the pm2 plugin
+ */
+export interface Pm2RawMetricType extends Omit<RawMetricType<PM2_AVAILABLE_METRICS>, 'labels'> {
+  /* The labels containing the mapping for the pm2 values */
   labels: typeof PM2_BASE_LABELS
+  /* The value mapping for retrieving the value from the pm2 data */
   value: ReturnType<typeof createValueMapping>
-  buckets?: number[]
 }
 
 /**
@@ -82,70 +82,70 @@ export const PM2_METRICS_RAW: Pm2RawMetricType[] = [
     },
   }, */
   {
-    key: 'pm2_unstable_restarts',
+    name: 'pm2_unstable_restarts',
     type: NativeMetricTypes.Gauge,
     description: 'Number of unstable restarts',
     labels: PM2_BASE_LABELS,
     value: createValueMapping(['pm2_env', 'unstable_restarts']),
   },
   {
-    key: 'pm2_restart_time',
+    name: 'pm2_restart_time',
     type: NativeMetricTypes.Gauge,
     description: 'The amount of restarts',
     labels: PM2_BASE_LABELS,
     value: createValueMapping(['pm2_env', 'restart_time']),
   },
   {
-    key: 'pm2_uptime',
+    name: 'pm2_uptime',
     type: NativeMetricTypes.Gauge,
     description: 'PM2 uptime (in milliseconds)',
     labels: PM2_BASE_LABELS,
     value: createValueMapping(['pm2_env', 'pm_uptime']),
   },
   {
-    key: 'pm2_status',
+    name: 'pm2_status',
     type: NativeMetricTypes.Gauge,
     description: 'PM2 process status',
     labels: PM2_BASE_LABELS,
     value: createValueMapping(['pm2_env', 'status']),
   },
   {
-    key: 'pm2_memory_rss',
+    name: 'pm2_memory_rss',
     type: NativeMetricTypes.Gauge,
     description: 'Memory usage of the PM2 process (in bytes)',
     labels: PM2_BASE_LABELS,
     value: createValueMapping(['monit', 'memory']),
   },
   {
-    key: 'pm2_cpu_usage',
+    name: 'pm2_cpu_usage',
     type: NativeMetricTypes.Gauge,
     description: 'CPU usage of the PM2 process (percentage)',
     labels: PM2_BASE_LABELS,
     value: createValueMapping(['monit', 'cpu']),
   },
   {
-    key: 'pm2_heap_size_used',
+    name: 'pm2_heap_size_used',
     type: NativeMetricTypes.Gauge,
     description: 'Used heap size of V8 runtime (in MiB)',
     labels: PM2_BASE_LABELS,
     value: createValueMapping(['pm2_env', 'axm_monitor', 'Used Heap Size'], true),
   },
   {
-    key: 'pm2_heap_usage',
+    name: 'pm2_heap_usage',
     type: NativeMetricTypes.Gauge,
     description: 'Heap memory usage (percentage)',
     labels: PM2_BASE_LABELS,
     value: createValueMapping(['pm2_env', 'axm_monitor', 'Heap Usage'], true),
   },
   {
-    key: 'pm2_heap_size',
+    name: 'pm2_heap_size',
     type: NativeMetricTypes.Gauge,
     description: 'Total heap size of V8 runtime (in MiB)',
     labels: PM2_BASE_LABELS,
     value: createValueMapping(['pm2_env', 'axm_monitor', 'Heap Size'], true),
   },
   {
-    key: 'pm2_event_loop_latency_p95',
+    name: 'pm2_event_loop_latency_p95',
     type: NativeMetricTypes.Gauge,
     description: '95th percentile of event loop latency (in milliseconds)',
     labels: PM2_BASE_LABELS,
@@ -153,7 +153,7 @@ export const PM2_METRICS_RAW: Pm2RawMetricType[] = [
     /*     buckets: [0.1, 0.3, 1.2, 5.0], */
   },
   {
-    key: 'pm2_event_loop_latency',
+    name: 'pm2_event_loop_latency',
     type: NativeMetricTypes.Gauge,
     description: '50th percentile of event loop latency (in milliseconds)',
     labels: PM2_BASE_LABELS,
@@ -161,28 +161,28 @@ export const PM2_METRICS_RAW: Pm2RawMetricType[] = [
     /*   buckets: [0.1, 0.3, 1.2, 5.0], */
   },
   {
-    key: 'pm2_active_handles',
+    name: 'pm2_active_handles',
     type: NativeMetricTypes.Gauge,
     description: 'Number of active handles in libuv',
     labels: PM2_BASE_LABELS,
     value: createValueMapping(['pm2_env', 'axm_monitor', 'Active handles'], true),
   },
   {
-    key: 'pm2_active_requests',
+    name: 'pm2_active_requests',
     type: NativeMetricTypes.Gauge,
     description: 'Number of active requests in libuv',
     labels: PM2_BASE_LABELS,
     value: createValueMapping(['pm2_env', 'axm_monitor', 'Active requests'], true),
   },
   {
-    key: 'pm2_http_requests',
+    name: 'pm2_http_requests',
     type: NativeMetricTypes.Gauge,
     description: 'HTTP requests per minute',
     labels: PM2_BASE_LABELS,
     value: createValueMapping(['pm2_env', 'axm_monitor', 'HTTP'], true),
   },
   {
-    key: 'pm2_http_latency_p95',
+    name: 'pm2_http_latency_p95',
     type: NativeMetricTypes.Gauge,
     description: '95th percentile of HTTP latency (in milliseconds)',
     labels: PM2_BASE_LABELS,
@@ -190,7 +190,7 @@ export const PM2_METRICS_RAW: Pm2RawMetricType[] = [
     /*     buckets: [0.1, 0.3, 1.2, 5.0], */
   },
   {
-    key: 'pm2_http_latency_mean',
+    name: 'pm2_http_latency_mean',
     type: NativeMetricTypes.Gauge,
     description: 'Mean HTTP latency (in milliseconds)',
     labels: PM2_BASE_LABELS,
@@ -198,6 +198,11 @@ export const PM2_METRICS_RAW: Pm2RawMetricType[] = [
     /*    buckets: [0.1, 0.3, 1.2, 5.0], */
   },
 ]
+
+/**
+ * The pm2 metrics constructed from the metadata
+ */
+export const PM2_METRICS = createPm2Metrics(PM2_METRICS_RAW)
 
 /**
  * Creates the value mapping for the metric
@@ -210,4 +215,25 @@ export function createValueMapping(mapping: string[], hasUnit: boolean = false) 
     mapping,
     withUnit: hasUnit,
   }
+}
+
+/**
+ * Creates the pm2 metrics from the metadata
+ * @param rawMetrics The metadata for the pm2 metrics
+ * @returns The created metrics
+ */
+export function createPm2Metrics(rawMetrics: typeof PM2_METRICS_RAW) {
+  const metrics = []
+
+  for (const sharedOptions of rawMetrics) {
+    // Construct the metrics based on the type
+    const metric = createInstanceFromRawMetric({
+      ...sharedOptions,
+      labels: getLabelsFromRecord(sharedOptions.labels),
+    })
+
+    if (metric) metrics.push(metric)
+  }
+
+  return metrics
 }

@@ -1,8 +1,7 @@
 import { Plugin } from '@quickstat/core'
 
-import { PM2_METRICS_RAW } from './metrics/metrics'
+import { PM2_METRICS, PM2_METRICS_RAW } from './metrics/metrics'
 import { getValueFromRawMetricWithMapping } from './metrics/parse'
-import { PM2_METRICS } from './metrics/shared'
 
 import type { MultiCounter, MultiGauge, MultiHistogram } from '@quickstat/core'
 import type pm2 from 'pm2'
@@ -119,7 +118,7 @@ export class Pm2Plugin extends Plugin {
     PM2_METRICS_RAW.forEach(metric => {
       // Get the raw metrics from the pm2 list for each pm2 metric
       rawMetrics.forEach(data => {
-        this.parseMetricValue(data, metric.key, metric.labels, metric.value)
+        this.parseMetricValue(data, metric.name, metric.labels, metric.value)
       })
     })
 
