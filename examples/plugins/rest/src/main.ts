@@ -1,16 +1,14 @@
 import { Client as QuickStatClient } from '@quickstat/core'
-import { Pm2Plugin } from '@quickstat/pm2'
 import { PrometheusDataSource, ScrapeStrategy } from '@quickstat/prometheus'
-import pm2 from 'pm2'
+import { RestPlugin } from '@quickstat/rest'
 import http from 'http'
-import { DemoProcessManager } from './pm2/main.js'
 
 // Create QuickStat Client
 const quickStatClient = new QuickStatClient<PrometheusDataSource<ScrapeStrategy>>({
   metrics: [],
   plugins: [
-    // Register PM2 Plugin
-    new Pm2Plugin({ pm2 }),
+    // Register Rest Plugin
+    new RestPlugin(),
   ],
   // Register the data source
   dataSource: new PrometheusDataSource({
@@ -29,6 +27,3 @@ http.createServer(async (req, res) => {
     res.end(response.file)
   }
 }).listen(3242)
-
-// IMPORTANT: The following code below is just for demonstration purposes -> spins up some pm2 processes
-new DemoProcessManager().start()

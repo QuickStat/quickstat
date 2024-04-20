@@ -56,4 +56,4 @@ export const REST_METRICS_RAW: RestRawMetricType[] = [
 /**
  * The rest metrics instances from the raw metrics
  */
-export const REST_METRICS = REST_METRICS_RAW.map(createInstanceFromRawMetric)
+export const REST_METRICS = REST_METRICS_RAW.map(createInstanceFromRawMetric).filter(x => x !== undefined)

@@ -3,7 +3,7 @@ import { Plugin } from '@quickstat/core'
 import { PM2_METRICS, PM2_METRICS_RAW } from './metrics/metrics'
 import { getValueFromRawMetricWithMapping } from './metrics/parse'
 
-import type { MultiCounter, MultiGauge, MultiHistogram } from '@quickstat/core'
+import type { MultiCounter, MultiGauge, MultiHistogram, PluginOptions } from '@quickstat/core'
 import type pm2 from 'pm2'
 import type { createValueMapping } from './metrics/metrics'
 import type { PM2_AVAILABLE_METRICS } from './metrics/metrics'
@@ -11,12 +11,7 @@ import type { PM2_AVAILABLE_METRICS } from './metrics/metrics'
 /**
  * The options for the pm2 plugin.
  */
-export interface Pm2PluginOptions {
-  /**
-   * The metrics to not collect from the pm2 list
-   */
-  excludeMetrics: PM2_AVAILABLE_METRICS[]
-
+export interface Pm2PluginOptions extends Omit<PluginOptions<PM2_AVAILABLE_METRICS>, 'metrics'> {
   /**
    * The pm2 instance to get the metrics from
    */

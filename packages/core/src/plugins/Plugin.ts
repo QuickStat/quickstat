@@ -3,7 +3,7 @@ import type { Client, INativeMetric } from 'src'
 /**
  * The options for the plugin.
  */
-export interface PluginOptions {
+export interface PluginOptions<metrics = string> {
   /**
    * The different metrics which are collected and persisted.
    */
@@ -12,7 +12,7 @@ export interface PluginOptions {
   /**
    * Remove following metrics with given key from the plugin
    */
-  excludeMetrics?: string[]
+  excludeMetrics?: metrics[]
 
   /**
    * The client to register the plugin to.

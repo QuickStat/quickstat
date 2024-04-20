@@ -82,6 +82,28 @@ importers:
         specifier: ^5.4.3
         version: 5.4.3
 
+  examples/plugins/rest:
+    dependencies:
+      '@quickstat/core':
+        specifier: workspace:*
+        version: link:../../../packages/core
+      '@quickstat/prometheus':
+        specifier: workspace:*
+        version: link:../../../packages/datasources/prometheus
+      '@quickstat/rest':
+        specifier: workspace:*
+        version: link:../../../packages/plugins/rest
+    devDependencies:
+      '@quickstat/eslint-config':
+        specifier: workspace:*
+        version: link:../../../packages/config/eslint-config
+      eslint:
+        specifier: ^8.57.0
+        version: 8.57.0
+      typescript:
+        specifier: ^5.4.3
+        version: 5.4.3
+
   packages/config/eslint-config:
     dependencies:
       '@eslint/js':

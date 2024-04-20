@@ -48,5 +48,7 @@ export function createInstanceFromRawMetric(options: RawMetricType) {
         ...options,
         buckets: options.buckets ?? [0.1, 0.3, 1.2, 5.0],
       })
+    default:
+      return new MultiCounter(options)
   }
 }

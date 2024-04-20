@@ -16,7 +16,7 @@ export interface ObserveRestRequestOptions {
 /**
  * Starts observing the rest request for the latency and the request count
  */
-export class RestRequestObserve {
+export class RestRequestObserver {
   /* The client to observe the rest request for */
   private client: Client
 
