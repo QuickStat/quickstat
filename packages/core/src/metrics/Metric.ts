@@ -1,9 +1,9 @@
 import { DataPointManager } from 'src/datapoints/DataPointManager'
 import { normalizeLabelName } from 'src/shared/utils'
 
-import type { NativeMetricTypes } from 'src'
 import type { Client } from 'src/Client'
 import type { DataPoint } from 'src/datapoints/DataPoint'
+import type { NativeMetricTypes } from 'src/shared/types'
 
 /**
  * The options for the metric.

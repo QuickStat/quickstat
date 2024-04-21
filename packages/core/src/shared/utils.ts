@@ -1,4 +1,4 @@
-import { MultiCounter } from 'src'
+import { MultiCounter } from 'src/metrics/counter/MultiCounter'
 import { MultiGauge } from 'src/metrics/gauge/MultiGauge'
 import { MultiHistogram } from 'src/metrics/histogram/MultiHistogram'
 import { NativeMetricTypes, type RawMetricType } from './types'
