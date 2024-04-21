@@ -29,3 +29,4 @@ export * from './plugins/Plugin.ts'
 // ### Shared ###
 export * from './shared/types.ts'
 export * from './shared/utils.ts'
+export * from './shared/metrics.ts'
