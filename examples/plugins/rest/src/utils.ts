@@ -11,7 +11,8 @@ import http from 'http'
 export function getObservationData(req: Request, res: Response): ObserveRestRequestOptions {
     return {
         method: req.method as ObserveRestRequestOptions['method'],
-        path: req.path,
+        // @TODO use path params to automatically replace the ids
+        path: req.path.replace(/\d+/g, ':id'),
         status: res.statusCode,
         size: {
             request: req.socket.bytesRead,
@@ -35,6 +36,8 @@ export function simulateRequests(baseUrl: string, routes: { [method: string]: st
         if (route === lastRoute) return
         lastRoute = route
 
-        http.request(`${baseUrl}${route}`, { method })	
+        console.log(`Simulating ${method} request to ${baseUrl}${route}`)
+
+        http.request(`${baseUrl}${route.replace(":id", Math.floor(Math.random() * 100).toString())}`, { method }).end()
     }, 500)
 }

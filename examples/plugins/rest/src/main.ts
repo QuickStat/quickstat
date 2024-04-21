@@ -29,10 +29,11 @@ app.get('/users/:id/todos', async (req ,res) => {
   await new Promise(resolve => setTimeout(resolve, Math.random() * 1000))
 
   observer.end(getObservationData(req, res))
+  res.send('Todos')
 })
-app.post('/users/:id', (req,res) => { new RestRequestObserver(quickStatClient).end(getObservationData(req, res))})
-app.delete('/users/:id', (req,res) => { new RestRequestObserver(quickStatClient).end(getObservationData(req, res))})
-app.put('/users/:id', (req,res) => { new RestRequestObserver(quickStatClient).end(getObservationData(req, res))})
+app.post('/users/:id', (req,res) => { new RestRequestObserver(quickStatClient).end(getObservationData(req, res)); res.send('User created')})
+app.delete('/users/:id', (req,res) => { new RestRequestObserver(quickStatClient).end(getObservationData(req, res)); res.send('User deleted')})
+app.put('/users/:id', (req,res) => { new RestRequestObserver(quickStatClient).end(getObservationData(req, res)); res.send('User updated')})
 
 app.listen(3034, () => console.log('Server started at http://localhost:3034'))
 
