@@ -33,11 +33,20 @@ export function simulateRequests(baseUrl: string, routes: { [method: string]: st
         const method = Object.keys(routes)[Math.floor(Math.random() * Object.keys(routes).length)]
         const route = routes[method][Math.floor(Math.random() * routes[method].length)]
         // Skip some requests
-        if (route === lastRoute) return
+        //if (route === lastRoute) return
         lastRoute = route
 
         console.log(`Simulating ${method} request to ${baseUrl}${route}`)
 
         http.request(`${baseUrl}${route.replace(":id", Math.floor(Math.random() * 100).toString())}`, { method }).end()
-    }, 500)
+    }, 1000)
+}
+
+/**
+ * Returns a random status code
+ * @returns The random status code
+ */
+export function getRandomStatusCode() {
+    const statusCodes = [200, 201, 204, 400, 401, 403, 404, 500, 502]
+    return statusCodes[Math.floor(Math.random() * statusCodes.length)]
 }

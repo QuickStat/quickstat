@@ -3,7 +3,7 @@ import { PrometheusDataSource, ScrapeStrategy } from '@quickstat/prometheus'
 import { RestPlugin, RestRequestObserver } from '@quickstat/rest'
 import http from 'http'
 import express from 'express'
-import { getObservationData, simulateRequests } from './utils.js'
+import { getObservationData, getRandomStatusCode, simulateRequests } from './utils.js'
 
 // Create QuickStat Client
 const quickStatClient = new QuickStatClient<PrometheusDataSource<ScrapeStrategy>>({
@@ -27,13 +27,27 @@ app.get('/users/:id/todos', async (req ,res) => {
 
   // Do something which takes time
   await new Promise(resolve => setTimeout(resolve, Math.random() * 1000))
-
+  res.status(getRandomStatusCode()).send('Todos')
   observer.end(getObservationData(req, res))
-  res.send('Todos')
-})
-app.post('/users/:id', (req,res) => { new RestRequestObserver(quickStatClient).end(getObservationData(req, res)); res.send('User created')})
-app.delete('/users/:id', (req,res) => { new RestRequestObserver(quickStatClient).end(getObservationData(req, res)); res.send('User deleted')})
-app.put('/users/:id', (req,res) => { new RestRequestObserver(quickStatClient).end(getObservationData(req, res)); res.send('User updated')})
+});
+
+app.post('/users/:id', (req,res) => { 
+  const observer = new RestRequestObserver(quickStatClient)
+  res.status(getRandomStatusCode()).send('User created');
+  observer.end(getObservationData(req, res)); 
+});
+
+app.delete('/users/:id', (req,res) => { 
+  const observer = new RestRequestObserver(quickStatClient)
+  res.status(getRandomStatusCode()).send('User deleted');
+  observer.end(getObservationData(req, res)); 
+});
+
+app.put('/users/:id', (req,res) => { 
+  const observer = new RestRequestObserver(quickStatClient)
+  res.status(getRandomStatusCode()).send('User updated');
+  observer.end(getObservationData(req, res)); 
+});
 
 app.listen(3034, () => console.log('Server started at http://localhost:3034'))
 
