@@ -843,7 +843,7 @@
         "x": 0,
         "y": 24
       },
-      "id": 21,
+      "id": 27,
       "options": {
         "legend": {
           "calcs": [],
@@ -861,14 +861,14 @@
           "disableTextWrap": false,
           "editorMode": "code",
           "exemplar": false,
-          "expr": "sum(rate(rest_request_duration_bucket{application=~\"$application\"}[$__rate_interval])) by (method, path)",
+          "expr": "sum(rate(rest_request_duration_bucket{application=~\"$application\"}[$__rate_interval])) by (le)",
           "format": "time_series",
           "fullMetaSearch": false,
           "hide": false,
           "includeNullMetadata": true,
           "instant": false,
           "interval": "",
-          "legendFormat": "{{method}} {{path}}",
+          "legendFormat": "{{le}}",
           "range": true,
           "refId": "B",
           "useBackend": false
@@ -922,7 +922,7 @@
         "x": 12,
         "y": 24
       },
-      "id": 27,
+      "id": 28,
       "options": {
         "legend": {
           "calcs": [],
@@ -940,20 +940,20 @@
           "disableTextWrap": false,
           "editorMode": "code",
           "exemplar": false,
-          "expr": "sum(rate(rest_request_duration_bucket{application=~\"$application\"}[$__rate_interval])) by (method, path)",
+          "expr": "sum(rate(rest_request_size_bucket{application=~\"$application\"}[$__rate_interval])) by (le)",
           "format": "time_series",
           "fullMetaSearch": false,
           "hide": false,
           "includeNullMetadata": true,
           "instant": false,
           "interval": "",
-          "legendFormat": "{{method}} {{path}}",
+          "legendFormat": "{{le}}",
           "range": true,
           "refId": "B",
           "useBackend": false
         }
       ],
-      "title": "Request Duration Distribution",
+      "title": "Request Size Distribution",
       "type": "histogram"
     },
     {
@@ -1235,6 +1235,6 @@
   "timezone": "",
   "title": "REST Quickstat",
   "uid": "b7f7da8d-af69-4e42-8bdf-fa4511866524",
-  "version": 5,
+  "version": 6,
   "weekStart": ""
 }
