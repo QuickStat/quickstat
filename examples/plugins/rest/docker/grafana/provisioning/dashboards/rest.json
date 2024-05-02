@@ -466,7 +466,7 @@
           "refId": "A"
         }
       ],
-      "title": "Status 5XX/min",
+      "title": "Status 5XX/sec",
       "type": "stat"
     },
     {
@@ -795,7 +795,7 @@
           "useBackend": false
         }
       ],
-      "title": "Top 10 Request by Status/sec",
+      "title": "Request by Status/sec",
       "type": "timeseries"
     },
     {
@@ -1228,13 +1228,13 @@
     ]
   },
   "time": {
-    "from": "now-30m",
+    "from": "now-15m",
     "to": "now"
   },
   "timepicker": {},
   "timezone": "",
   "title": "REST Quickstat",
   "uid": "b7f7da8d-af69-4e42-8bdf-fa4511866524",
-  "version": 6,
+  "version": 1,
   "weekStart": ""
 }
