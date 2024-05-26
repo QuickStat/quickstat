@@ -142,6 +142,7 @@ export class NativeHistogram extends Metric<NativeHistogram> implements INativeM
    */
   protected _setBuckets(buckets: number[]) {
     this.buckets = buckets.sort((a, b) => a - b)
+    Object.freeze(this.buckets)
   }
 
   /**

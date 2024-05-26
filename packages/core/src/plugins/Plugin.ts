@@ -1,6 +1,5 @@
-import type { Client } from "src/Client"
-import type { INativeMetric } from "src/metrics/Metric"
-
+import type { Client } from 'src/Client'
+import type { INativeMetric } from 'src/metrics/Metric'
 
 /**
  * The options for the plugin.

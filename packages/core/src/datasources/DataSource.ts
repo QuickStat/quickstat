@@ -41,7 +41,7 @@ export class DataSource {
 
     const timestamp = Date.now()
 
-    // Call the before collect callback for the plugins so it can set data from other sources instead of individually setting it through onCollect
+    // Trigger the onCollect function for all plugins, which can be used to retrieve data from external sources
     await Promise.all(
       this.client.plugins.map(async (plugin) => plugin.onCollect(timestamp)),
     )

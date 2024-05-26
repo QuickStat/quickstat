@@ -22,37 +22,37 @@ const quickStatClient = new QuickStatClient<PrometheusDataSource<ScrapeStrategy>
 // For packages not supported by the rest plugin (expressjs is supported), write middleware functions to wrap around the request controller
 const app = express()
 
-app.get('/users/:id/todos', async (req ,res) => { 
-  const observer = new RestRequestObserver(quickStatClient);
+app.get('/users/:id/todos', async (req, res) => {
+  const observer = new RestRequestObserver(quickStatClient)
 
   // Do something which takes time
   await new Promise(resolve => setTimeout(resolve, Math.random() * 1000))
   res.status(getRandomStatusCode()).send('Todos')
   observer.end(getObservationData(req, res))
-});
+})
 
-app.post('/users/:id', (req,res) => { 
+app.post('/users/:id', (req, res) => {
   const observer = new RestRequestObserver(quickStatClient)
-  res.status(getRandomStatusCode()).send('User created');
-  observer.end(getObservationData(req, res)); 
-});
+  res.status(getRandomStatusCode()).send('User created')
+  observer.end(getObservationData(req, res))
+})
 
-app.delete('/users/:id', (req,res) => { 
+app.delete('/users/:id', (req, res) => {
   const observer = new RestRequestObserver(quickStatClient)
-  res.status(getRandomStatusCode()).send('User deleted');
-  observer.end(getObservationData(req, res)); 
-});
+  res.status(getRandomStatusCode()).send('User deleted')
+  observer.end(getObservationData(req, res))
+})
 
-app.put('/users/:id', (req,res) => { 
+app.put('/users/:id', (req, res) => {
   const observer = new RestRequestObserver(quickStatClient)
-  res.status(getRandomStatusCode()).send('User updated');
-  observer.end(getObservationData(req, res)); 
-});
+  res.status(getRandomStatusCode()).send('User updated')
+  observer.end(getObservationData(req, res))
+})
 
 app.listen(3034, () => console.log('Server started at http://localhost:3034'))
 
 // Randomly simulate requests to the given routes
-const routes = { GET: ['/users/:id/todos'], POST: ['/users/:id'], DELETE: ['/users/:id'], PUT: ['/users/:id']}
+const routes = { GET: ['/users/:id/todos'], POST: ['/users/:id'], DELETE: ['/users/:id'], PUT: ['/users/:id'] }
 simulateRequests('http://localhost:3034', routes)
 
 // Let Prometheus scrape the metrics at http://localhost:3242
