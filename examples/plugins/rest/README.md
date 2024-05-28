@@ -4,7 +4,7 @@ To quickly set up and run the Rest Plugin example, follow the steps below.
 
 ## Grafana Dashboard
 
-The dashboard is located under `./docker/grafana/provisioning/dashboards/rest.json`, which also has been published to [Grafana's Dashboard Hub](https://grafana.com/grafana/dashboards/20864).
+The dashboard is located under `./docker/grafana/provisioning/dashboards/rest.json`, which also has been published to [Grafana's Dashboard Hub](https://grafana.com/grafana/dashboards/21152).
 
 ![]()
 
@@ -46,6 +46,14 @@ This command will spawn the necessary services required for running the Rest Plu
 - Grafana: Used for visualizing the metrics
 
 ### Start Rest Application
+
+After Docker has been successfully started, you can now start the QuickStat Rest metrics collector:
+
+```bash
+npm run start:main
+```
+
+After the application has been started the metrics will be exposed at `http://localhost:3242`, ready for scraping by Prometheus.Furthermore a simple rest api is exposed at `http://localhost:3032`, where requests will be executed in order to generate metrics.
 
 # Disclaimer
 
