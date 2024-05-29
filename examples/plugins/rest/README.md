@@ -6,7 +6,9 @@ To quickly set up and run the Rest Plugin example, follow the steps below.
 
 The dashboard is located under `./docker/grafana/provisioning/dashboards/rest.json`, which also has been published to [Grafana's Dashboard Hub](https://grafana.com/grafana/dashboards/21152).
 
-![]()
+![](./assets/rest_grafana_overview.png)
+![](./assets/rest_grafana_distribution.png)
+![](./assets/rest_grafana_size.png)
 
 ### Clone Repo & Install Dependencies
 

@@ -4,8 +4,8 @@ The QuickStat REST Plugin offers seamless integration with REST instances, allow
 
 If you are new to QuickStat and its component, feel free to check the [official documentation](https://www.npmjs.com/package/@quickstat/core) for a detailed breakdown.
 
-![]()
-![]()
+![](../../../examples/plugins/rest/assets/rest_grafana_overview.png)
+![](../../../examples/plugins/rest/assets/rest_grafana_distribution.png)
 
 ## Installation
 
@@ -35,7 +35,7 @@ If you want to set up Prometheus and Grafana manually, follow the steps below:
 
 ### 2. Import Dashboard to Grafana
 
-Once Prometheus and Grafana are set up, you can add [following Dashboard](). Navigate to the Grafana dashboard page, click on "Import" and paste the dashboard template URL. Then, customize the dashboard as needed.
+Once Prometheus and Grafana are set up, you can add [following Dashboard](https://grafana.com/grafana/dashboards/21152). Navigate to the Grafana dashboard page, click on "Import" and paste the dashboard template URL. Then, customize the dashboard as needed.
 
 ### 3. Expose REST Metrics
 
