@@ -19,7 +19,7 @@ const quickStatClient = new QuickStatClient<PrometheusDataSource<ScrapeStrategy>
 })
 
 // Express app (simple track for demonstration purposes)
-// For packages not supported by the rest plugin (expressjs is supported), write middleware functions to wrap around the request controller
+// For packages not supported by the rest plugin (express.js is supported), write middleware functions to wrap around the request controller
 const app = express()
 
 app.get('/users/:id/todos', async (req, res) => {
