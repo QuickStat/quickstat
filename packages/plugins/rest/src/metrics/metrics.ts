@@ -1,4 +1,6 @@
-import { NativeMetricTypes, createInstanceFromRawMetric, type RawMetricType } from '@quickstat/core'
+import { createInstanceFromRawMetric, NativeMetricTypes  } from '@quickstat/core'
+
+import type {RawMetricType} from '@quickstat/core';
 
 export const REST_BASE_LABELS = ['method', 'path', 'status']
 

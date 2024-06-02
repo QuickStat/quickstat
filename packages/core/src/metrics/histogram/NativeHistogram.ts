@@ -1,11 +1,11 @@
 import { DataPoint } from 'src/datapoints/DataPoint'
+import { NativeMetricTypes } from 'src/shared/types'
 
 import { Metric } from '../Metric'
 
 import type { Client } from 'src/Client'
 import type { DataPointLabelValue } from 'src/datapoints/DataPoint'
 import type { INativeMetric, MetricOptions } from '../Metric'
-import { NativeMetricTypes } from 'src/shared/types'
 
 /**
  * The options for the histogram metric.

@@ -3,7 +3,10 @@
 import { MultiCounter } from 'src/metrics/counter/MultiCounter'
 import { MultiGauge } from 'src/metrics/gauge/MultiGauge'
 import { MultiHistogram } from 'src/metrics/histogram/MultiHistogram'
-import { type RawMetricType, NativeMetricTypes } from './types'
+
+import { NativeMetricTypes } from './types'
+
+import type {RawMetricType} from './types';
 
 /**
  * Creates an instance of the metric from the raw metric type.

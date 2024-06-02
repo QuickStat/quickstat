@@ -1,5 +1,6 @@
+import { createInstanceFromRawMetric, getLabelsFromRecord,NativeMetricTypes } from '@quickstat/core'
+
 import type { RawMetricType } from '@quickstat/core'
-import { NativeMetricTypes, createInstanceFromRawMetric, getLabelsFromRecord } from '@quickstat/core'
 
 /**
  * The base labels for the pm2 metrics

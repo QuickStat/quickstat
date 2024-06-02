@@ -1,5 +1,9 @@
-import { Plugin, type PluginOptions } from '@quickstat/core'
-import { REST_METRICS, type REST_AVAILABLE_METRICS } from './metrics/metrics'
+import { Plugin  } from '@quickstat/core'
+
+import { REST_METRICS } from './metrics/metrics'
+
+import type {PluginOptions} from '@quickstat/core';
+import type {REST_AVAILABLE_METRICS} from './metrics/metrics';
 
 /**
  * The options for the rest plugin.
