@@ -63,7 +63,8 @@ export class MultiHistogram extends NativeHistogram {
    * @returns The data point for the given labels and bucket
    */
   private getDataPoint(labels: string[], bucket: number | '+Inf' = '+Inf') {
-    labels.unshift(bucket.toString())
-    return this.values.find(value => value.labels.join() === labels.join())
+    const requestedLabels = labels.slice() // Shallow copy the labels
+    requestedLabels.unshift(bucket.toString())
+    return this.values.find(value => value.labels.join() === requestedLabels.join())
   }
 }

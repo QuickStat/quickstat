@@ -1,5 +1,5 @@
-import { NativeMetricTypes } from 'src'
 import { DataPoint } from 'src/datapoints/DataPoint'
+import { NativeMetricTypes } from 'src/shared/types'
 
 import { Metric } from '../Metric'
 
@@ -98,17 +98,18 @@ export class NativeCounter extends Metric<NativeCounter> implements INativeMetri
    * @param value The value to increment the counter by e.g. 1
    */
   protected _inc(labels: string[], value: number = 1) {
-    value = Math.abs(value)
-    this.value += value
+    const incValue = Math.abs(value)
+    this.value += incValue
 
     if (labels.length > 0) {
       this.validateLabels(labels)
 
       const index = this.values.findIndex(value => value.labels.join() === labels.join())
       if (index === -1) {
-        this.values.push({ labels, value, sum: value })
+        this.values.push({ labels, value: incValue, sum: incValue })
       } else {
-        this.values[index]!.value += value
+        this.values[index]!.value += incValue
+        this.values[index]!.sum += incValue
       }
     }
 

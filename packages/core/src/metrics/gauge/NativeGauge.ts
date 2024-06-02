@@ -24,17 +24,17 @@ export class NativeGauge extends NativeCounter {
    * @param value The value to decrement by e.g. 1
    */
   protected _dec(labels: string[], value: number = 1) {
-    value = Math.abs(value)
-    this.value -= value
+    const decValue = Math.abs(value)
+    this.value -= decValue
 
     if (labels.length > 0) {
       this.validateLabels(labels)
 
       const index = this.values.findIndex(value => value.labels.join() === labels.join())
       if (index === -1) {
-        this.values.push({ labels, value, sum: value })
+        this.values.push({ labels, value: decValue, sum: decValue })
       } else {
-        this.values[index]!.value -= value
+        this.values[index]!.value -= decValue
       }
     }
 

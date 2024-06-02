@@ -10,10 +10,7 @@ const quickStatClient = new QuickStatClient<PrometheusDataSource<ScrapeStrategy>
   metrics: [],
   plugins: [
     // Register PM2 Plugin
-    new Pm2Plugin({
-      excludeMetrics: [],
-      pm2,
-    }),
+    new Pm2Plugin({ pm2 }),
   ],
   // Register the data source
   dataSource: new PrometheusDataSource({

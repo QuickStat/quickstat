@@ -1,5 +1,5 @@
-import { NativeMetricTypes } from 'src'
 import { DataPoint } from 'src/datapoints/DataPoint'
+import { NativeMetricTypes } from 'src/shared/types'
 
 import { Metric } from '../Metric'
 
@@ -142,6 +142,7 @@ export class NativeHistogram extends Metric<NativeHistogram> implements INativeM
    */
   protected _setBuckets(buckets: number[]) {
     this.buckets = buckets.sort((a, b) => a - b)
+    Object.freeze(this.buckets)
   }
 
   /**
