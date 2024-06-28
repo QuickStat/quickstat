@@ -7,6 +7,12 @@ If you are new to QuickStat and its component, feel free to check the [official 
 ![](../../../examples/plugins/rest/assets/rest_grafana_overview.png)
 ![](../../../examples/plugins/rest/assets/rest_grafana_distribution.png)
 
+**If one of the following frameworks is being used, the dedicated plugins should be used instead of the REST plugin:**
+- [Express.js Plugin](https://npmjs.com/package/@quickstat/expressjs)
+- [Fastify Plugin](https://npmjs.com/package/@quickstat/fastify)
+- [Koa Plugin](https://npmjs.com/package/@quickstat/koa)
+
+
 ## Installation
 
 Start by installing the QuickStat core package, the data source used by grafana and then the REST plugin:
@@ -15,9 +21,6 @@ Start by installing the QuickStat core package, the data source used by grafana 
 npm install @quickstat/core
 npm install @quickstat/prometheus
 npm install @quickstat/rest
-# npm install @quickstat/express.js
-# npm install @quickstat/fastify
-# npm install @quickstat/koa
 ```
 
 ## Getting Started
@@ -81,9 +84,9 @@ http.createServer(async (req, res) => {
 
 ### 4. Add Observation Logic
 
-**If your REST framework is supported by the plugin, you can skip this step and use following plugins instead:**
+**If your REST framework is supported by the plugin, you should follow the framework guide for the plugin instead:**
 
-- [Express Plugin](https://npmjs.com/package/@quickstat/express.js)
+- [Express Plugin](https://npmjs.com/package/@quickstat/expressjs)
 - [Fastify Plugin](https://npmjs.com/package/@quickstat/fastify)
 - [Koa Plugin](https://npmjs.com/package/@quickstat/koa)
 

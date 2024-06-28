@@ -246,6 +246,9 @@ importers:
       '@quickstat/core':
         specifier: workspace:*
         version: link:../../core
+      '@quickstat/rest':
+        specifier: workspace:*
+        version: link:../rest
     devDependencies:
       '@quickstat/eslint-config':
         specifier: workspace:*
@@ -256,9 +259,15 @@ importers:
       '@quickstat/tsup-config':
         specifier: workspace:*
         version: link:../../config/tsup-config
+      '@types/express':
+        specifier: ^4.17.21
+        version: 4.17.21
       eslint:
         specifier: ^8.57.0
         version: 8.57.0
+      express:
+        specifier: ^4.19.2
+        version: 4.19.2
       tsup:
         specifier: ^8.0.2
         version: 8.0.2(postcss@8.4.35)(ts-node@10.9.2(@types/node@20.12.7)(typescript@5.4.5))(typescript@5.4.5)
