@@ -34,13 +34,15 @@
     "lint": "ESLINT_USE_FLAT_CONFIG=true eslint --format pretty .",
     "lint-fix": "bun run lint --quiet --fix",
     "start": "tsc --watch",
-    "start:main": "node ./dist/main.js",
+    "start:general": "node ./dist/mainGeneral.js",
+    "start:express": "node ./dist/mainExpress.js",
     "test": "vitest --passWithNoTests",
     "typecheck": "tsc -p ./tsconfig.json --noEmit --emitDeclarationOnly false"
   },
   "dependencies": {
     "@quickstat/core": "workspace:*",
     "@quickstat/rest": "workspace:*",
+    "@quickstat/expressjs": "workspace:*",
     "@quickstat/prometheus": "workspace:*",
     "express": "^4.19.2"
   },

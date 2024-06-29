@@ -87,6 +87,9 @@ importers:
       '@quickstat/core':
         specifier: workspace:*
         version: link:../../../packages/core
+      '@quickstat/expressjs':
+        specifier: workspace:*
+        version: link:../../../packages/plugins/expressjs
       '@quickstat/prometheus':
         specifier: workspace:*
         version: link:../../../packages/datasources/prometheus
