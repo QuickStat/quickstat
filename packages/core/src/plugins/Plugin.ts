@@ -68,6 +68,14 @@ export class Plugin {
     client.registerPlugin(this)
   }
 
+
+  /**
+   * The onRegister function which is called when the plugin is registered to the client.
+   */
+  public onRegister() {
+    return null
+  }
+
   /**
    * Collect the metrics from the plugin if they need to be collected from other sources.
    * @param timestamp The timestamp to collect the metrics at

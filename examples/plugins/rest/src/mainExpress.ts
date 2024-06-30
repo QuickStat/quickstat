@@ -3,7 +3,7 @@ import { PrometheusDataSource, ScrapeStrategy } from '@quickstat/prometheus'
 import { RestPlugin, RestRequestObserver } from '@quickstat/rest'
 import http from 'http'
 import express from 'express'
-import { getObservationData, getRandomStatusCode, simulateRequests } from './utils.js'
+import { getRandomStatusCode, simulateRequests } from './utils.js'
 import { ExpressPlugin } from '@quickstat/expressjs'
 
 const app = express()

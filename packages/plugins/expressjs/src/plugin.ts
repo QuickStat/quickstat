@@ -20,16 +20,15 @@ export class ExpressPlugin extends RestPlugin {
         super(options);
         this.app = options.app;
     }
-    
-    /**
-     * Registers the plugin on the client and injects the middleware
-     * @param client The QuickStat client to register the plugin on
-     */
-    public register(client: Client): void {
-        super.register(client);
-        this.setupMiddleware();
-    }
 
+    /**
+     * Called once the client registers the plugin and injects the middleware to the express app
+     */
+    public onRegister() {
+        this.setupMiddleware();
+        return null;
+    }
+    
     /**
      * Sets up the middleware for the express app
      */

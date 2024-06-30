@@ -91,6 +91,7 @@ export class Client<D extends DataSource = DataSource> {
     }
 
     plugin.client = this
+    plugin.onRegister()
     this.plugins.push(plugin)
     this.registerMetrics(plugin.metrics)
   }
