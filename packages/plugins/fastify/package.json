@@ -1,12 +1,11 @@
 {
-  "name": "@quickstat/demo-plugins-rest",
-  "private": true,
+  "name": "@quickstat/fastify",
   "version": "0.0.1",
-  "description": "Demo",
+  "description": "Effortlessly monitor fastify rest metrics and export them to Prometheus for visualization in Grafana",
   "repository": {
     "type": "git",
     "url": "git://https://github.com/QuickStat/quickstat.git",
-    "directory": "examples/plugins/rest"
+    "directory": "packages/plugins/fastify"
   },
   "license": "Apache-2.0",
   "author": "DxLoop",
@@ -29,30 +28,27 @@
     "dist"
   ],
   "scripts": {
-    "build": "tsc -p ./tsconfig.json",
+    "build": "tsup",
     "clean": "npx rimraf ./dist",
     "lint": "ESLINT_USE_FLAT_CONFIG=true eslint --format pretty .",
     "lint-fix": "bun run lint --quiet --fix",
-    "start": "tsc --watch",
-    "start:general": "node ./dist/mainGeneral.js",
-    "start:express": "node ./dist/mainExpress.js",
-    "start:fastify": "node ./dist/mainFastify.js",
+    "release": "pnpm publish --no-git-check",
+    "release:canary": "bash ../../.github/canary.sh && node ../../scripts/build.js canary && pnpm publish --no-git-check",
+    "start": "tsup --watch",
     "test": "vitest --passWithNoTests",
     "typecheck": "tsc -p ./tsconfig.json --noEmit --emitDeclarationOnly false"
   },
   "dependencies": {
     "@quickstat/core": "workspace:*",
-    "@quickstat/prometheus": "workspace:*",
-    "@quickstat/rest": "workspace:*",
-    "@quickstat/expressjs": "workspace:*",
-    "@quickstat/fastify": "workspace:*",
-    "express": "^4.19.2",
-    "fastify": "^4.28.1"
+    "@quickstat/rest": "workspace:*"
   },
   "devDependencies": {
     "@quickstat/eslint-config": "workspace:*",
-    "@types/express": "^4.17.21",
+    "@quickstat/ts-config": "workspace:*",
+    "@quickstat/tsup-config": "workspace:*",
+    "fastify": "^4.28.1",
     "eslint": "^8.57.0",
+    "tsup": "^8.0.2",
     "typescript": "^5.4.5"
   },
   "packageManager": "pnpm@9.1.4",
@@ -63,5 +59,29 @@
   "publishConfig": {
     "access": "public",
     "registry": "https://registry.npmjs.org/"
-  }
+  },
+  "keywords": [
+    "rest",
+    "api",
+    "fastify",
+    "swagger",
+    "request",
+    "response",
+    "service",
+    "metrics",
+    "monitor",
+    "monitoring",
+    "performance",
+    "node.js",
+    "plugin",
+    "track",
+    "tracking",
+    "stats",
+    "statistics",
+    "analytics",
+    "visualization",
+    "dashboard",
+    "grafana",
+    "prometheus"
+  ]
 }
