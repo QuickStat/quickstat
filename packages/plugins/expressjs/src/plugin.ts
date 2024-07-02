@@ -1,4 +1,3 @@
-import type { Client, DataSource } from "@quickstat/core";
 import { RestPlugin, RestRequestObserver, type ObserveRestRequestOptions, type RestPluginOptions } from "@quickstat/rest";
 import type { Request, Response, NextFunction, Express } from 'express';
 
