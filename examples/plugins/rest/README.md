@@ -49,10 +49,13 @@ This command will spawn the necessary services required for running the Rest Plu
 
 ### Start Rest Application
 
-After Docker has been successfully started, you can now start the QuickStat Rest metrics collector:
+After Docker has been successfully started, you can now start one of the rest application based on your used framework:
 
 ```bash
-npm run start:main
+npm run start:main    # Framework not offered as plugin
+npm run start:express # Express.js Application
+npm run start:fastify # Fastify Application
+npm run start:koa     # Koa Application
 ```
 
 After the application has been started the metrics will be exposed at `http://localhost:3242`, ready for scraping by Prometheus.Furthermore a simple rest api is exposed at `http://localhost:3032`, where requests will be executed in order to generate metrics.
