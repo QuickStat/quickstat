@@ -30,7 +30,7 @@ npm install @quickstat/core
 
 ```bash
 npm install @quickstat/pm2
-npm install @quickstat/express.js
+npm install @quickstat/expressjs
 # - npm install @quickstat/fastify (for Fastify Stats)
 npm install @quickstat/node.js
 ```
@@ -88,8 +88,9 @@ Each plugin comes with various configuration options, and by following the hyper
 | --------------------------------------------------------------- | ---------------------------------- | ---------------------------------------------- |
 | [@quickstat/pm2](./packages/plugins/pm2/README.md)              | Provides metrics for PM2 instances | CPU, Memory, Process metrics etc.              |
 | [@quickstat/rest](./packages/plugins/rest/README.md)            | Provides metrics for REST services | Request count, Response time, Error count etc. |
-| [@quickstat/express.js](./packages/plugins/expressjs/README.md) | Provides metrics for Express.js    | Request count, Response time, Error count etc. |
-| [@quickstat/fastify]()                                          | Provides metrics for Fastify       | Request count, Response time, Error count etc. |
+| [@quickstat/expressjs](./packages/plugins/expressjs/README.md)  | Provides metrics for Express.js    | Request count, Response time, Error count etc. |
+| [@quickstat/fastify](./packages/plugins/fastify/README.md)      | Provides metrics for Fastify       | Request count, Response time, Error count etc. |
+| [@quickstat/koa](./packages/plugins/koa/README.md)              | Provides metrics for Koa           | Request count, Response time, Error count etc. |
 | [@quickstat/node.js]()                                          | Provides metrics for Node.js       | Event loop delay, Memory usage, CPU usage etc. |
 
 We are continuously working on expanding our collection of plugins to cover more libraries and services. If you have any suggestions for new plugins or would like to contribute your own plugin, feel free to open an issue on our GitHub repository or submit a pull request.
@@ -98,9 +99,9 @@ We are continuously working on expanding our collection of plugins to cover more
 
 Data sources play a crucial role in aggregating collected data from registered metrics and persisting them or making them available for visualization in Grafana. QuickStat currently supports Prometheus with various strategies including scrape, push gateway, or remote write (WIP). However, there are plans to introduce additional data sources such as InfluxDB, PostgreSQL etc. in the future.
 
-| Data Source               | Description                                         | Strategies              |
-| ------------------------- | --------------------------------------------------- | ----------------------- |
-| [@quickstat/prometheus]() | Convert the metrics to a Prometheus readable format | Scrape and Push Gateway |
+| Data Source                                                          | Description                                         | Strategies              |
+| -------------------------------------------------------------------- | --------------------------------------------------- | ----------------------- |
+| [@quickstat/prometheus](./packages/datasources/prometheus/README.md) | Convert the metrics to a Prometheus readable format | Scrape and Push Gateway |
 
 ### Client
 
