@@ -68,7 +68,6 @@ export class Plugin {
     client.registerPlugin(this)
   }
 
-
   /**
    * The onRegister function which is called when the plugin is registered to the client.
    */

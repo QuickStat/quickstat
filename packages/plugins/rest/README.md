@@ -8,10 +8,10 @@ If you are new to QuickStat and its component, feel free to check the [official 
 ![](../../../examples/plugins/rest/assets/rest_grafana_distribution.png)
 
 **If one of the following frameworks is being used, the dedicated plugins should be used instead of the REST plugin:**
+
 - [Express.js Plugin](https://npmjs.com/package/@quickstat/expressjs)
 - [Fastify Plugin](https://npmjs.com/package/@quickstat/fastify)
 - [Koa Plugin](https://npmjs.com/package/@quickstat/koa)
-
 
 ## Installation
 

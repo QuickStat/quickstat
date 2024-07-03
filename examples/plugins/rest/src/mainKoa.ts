@@ -1,13 +1,13 @@
-import Koa from 'koa';
-import Router from 'koa-router';
-import { Client as QuickStatClient } from '@quickstat/core';
-import { PrometheusDataSource, ScrapeStrategy } from '@quickstat/prometheus';
-import { KoaPlugin } from '@quickstat/koa';
-import http from 'http';
-import { getRandomStatusCode, simulateRequests } from './utils.js';
+import Koa from 'koa'
+import Router from 'koa-router'
+import { Client as QuickStatClient } from '@quickstat/core'
+import { PrometheusDataSource, ScrapeStrategy } from '@quickstat/prometheus'
+import { KoaPlugin } from '@quickstat/koa'
+import http from 'http'
+import { getRandomStatusCode, simulateRequests } from './utils.js'
 
-const app = new Koa();
-const router = new Router();
+const app = new Koa()
+const router = new Router()
 
 // Create QuickStat Client
 const quickStatClient = new QuickStatClient<PrometheusDataSource<ScrapeStrategy>>({
@@ -20,37 +20,37 @@ const quickStatClient = new QuickStatClient<PrometheusDataSource<ScrapeStrategy>
   dataSource: new PrometheusDataSource({
     strategy: new ScrapeStrategy(),
   }),
-});
+})
 
 router.get('/users/:id/todos', async (ctx) => {
   // Simulate asynchronous work
-  await new Promise(resolve => setTimeout(resolve, Math.random() * 1000));
-  ctx.status = getRandomStatusCode();
-  ctx.body = 'Todos';
-});
+  await new Promise(resolve => setTimeout(resolve, Math.random() * 1000))
+  ctx.status = getRandomStatusCode()
+  ctx.body = 'Todos'
+})
 
 router.post('/users/:id', async (ctx) => {
-  ctx.status = getRandomStatusCode();
-  ctx.body = 'User created';
-});
+  ctx.status = getRandomStatusCode()
+  ctx.body = 'User created'
+})
 
 router.delete('/users/:id', async (ctx) => {
-  ctx.status = getRandomStatusCode();
-  ctx.body = 'User deleted';
-});
+  ctx.status = getRandomStatusCode()
+  ctx.body = 'User deleted'
+})
 
 router.put('/users/:id', async (ctx) => {
-  ctx.status = getRandomStatusCode();
-  ctx.body = 'User updated';
-});
+  ctx.status = getRandomStatusCode()
+  ctx.body = 'User updated'
+})
 
 // Use the router middleware
-app.use(router.routes()).use(router.allowedMethods());
+app.use(router.routes()).use(router.allowedMethods())
 
 // Start Koa server
 app.listen(3034, () => {
-  console.log('Server started at http://localhost:3034');
-});
+  console.log('Server started at http://localhost:3034')
+})
 
 // Randomly simulate requests to the given routes
 const routes = { GET: ['/users/:id/todos'], POST: ['/users/:id'], DELETE: ['/users/:id'], PUT: ['/users/:id'] }

@@ -6,7 +6,7 @@ import { MultiHistogram } from 'src/metrics/histogram/MultiHistogram'
 
 import { NativeMetricTypes } from './types'
 
-import type {RawMetricType} from './types';
+import type { RawMetricType } from './types'
 
 /**
  * Creates an instance of the metric from the raw metric type.
