@@ -1,4 +1,6 @@
-import { RestPlugin, RestRequestObserver, type ObserveRestRequestOptions, type RestPluginOptions } from '@quickstat/rest'
+import { RestPlugin, RestRequestObserver } from '@quickstat/rest'
+
+import type { ObserveRestRequestOptions, RestPluginOptions } from '@quickstat/rest'
 import type Koa from 'koa'
 import type { Context, Next } from 'koa'
 
@@ -34,7 +36,13 @@ export class KoaPlugin extends RestPlugin {
    */
   private setupMiddleware() {
     this.app.use(async (ctx: Context, next: Next) => {
-      const observer = new RestRequestObserver(this.client!)
+      // If client is not set, skip the middleware
+      if (!this.client) {
+        await next()
+        return
+      }
+
+      const observer = new RestRequestObserver(this.client)
 
       try {
         await next()
@@ -51,7 +59,7 @@ export class KoaPlugin extends RestPlugin {
    * @returns The observation data
    */
   private getObservationData(ctx: Context) {
-    const path = ctx._matchedRoute || ctx.path
+    const path = ctx._matchedRoute as string || ctx.path
     return {
       method: ctx.method as ObserveRestRequestOptions['method'],
       path: path,

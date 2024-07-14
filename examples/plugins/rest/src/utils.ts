@@ -1,6 +1,7 @@
-import { ObserveRestRequestOptions } from '@quickstat/rest'
-import { Request, Response } from 'express'
 import http from 'http'
+
+import type { ObserveRestRequestOptions } from '@quickstat/rest'
+import type { Request, Response } from 'express'
 
 /**
  * Extracts the observation data from the request and response
@@ -9,10 +10,12 @@ import http from 'http'
  * @returns The observation data
  */
 export function getObservationData(req: Request, res: Response): ObserveRestRequestOptions {
+  // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-member-access
+  const path = req.route?.path || req.path
+
   return {
     method: req.method as ObserveRestRequestOptions['method'],
-    // @TODO use path params to automatically replace the ids
-    path: req.route.path, // get the path with variables,
+    path: path as string, // get the path with variables,
     status: res.statusCode,
     size: {
       request: req.socket.bytesRead,
@@ -28,13 +31,9 @@ export function getObservationData(req: Request, res: Response): ObserveRestRequ
  */
 export function simulateRequests(baseUrl: string, routes: { [method: string]: string[] }) {
   // Use interval with 500ms, skip some requests, randomly select a route
-  let lastRoute = ''
   setInterval(() => {
     const method = Object.keys(routes)[Math.floor(Math.random() * Object.keys(routes).length)]
     const route = routes[method][Math.floor(Math.random() * routes[method].length)]
-    // Skip some requests
-    // if (route === lastRoute) return
-    lastRoute = route
 
     console.log(`Simulating ${method} request to ${baseUrl}${route}`)
 

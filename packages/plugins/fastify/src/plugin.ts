@@ -1,5 +1,7 @@
-import { RestPlugin, RestRequestObserver, type ObserveRestRequestOptions, type RestPluginOptions } from '@quickstat/rest'
-import type { FastifyInstance, FastifyRequest, FastifyReply } from 'fastify'
+import { RestPlugin, RestRequestObserver } from '@quickstat/rest'
+
+import type { ObserveRestRequestOptions, RestPluginOptions } from '@quickstat/rest'
+import type { FastifyInstance, FastifyReply, FastifyRequest } from 'fastify'
 
 /** The options for the Fastify plugin */
 export type FastifyPluginOptions = RestPluginOptions & {
@@ -32,14 +34,15 @@ export class FastifyPlugin extends RestPlugin {
    * Sets up the middleware for the Fastify app
    */
   private setupMiddleware() {
-    this.app.addHook('onRequest', async (request: FastifyRequest, reply: FastifyReply) => {
-      // @ts-ignore
-      request._observer = new RestRequestObserver(this.client!)
+    this.app.addHook('onRequest', async (request: FastifyRequest, _reply: FastifyReply) => {
+      // @ts-expect-error Add the observer to the request object
+      request._observer = new RestRequestObserver(this.client)
     })
 
-    this.app.addHook('onSend', async (request: FastifyRequest, reply: FastifyReply, payload: any) => {
+    this.app.addHook('onSend', async (request: FastifyRequest, reply: FastifyReply, _payload: any) => {
       const observationData = this.getObservationData(request, reply)
-      // @ts-ignore
+      // @ts-expect-error Access the observer from the request object
+      // eslint-disable-next-line @typescript-eslint/no-unsafe-call, @typescript-eslint/no-unsafe-member-access
       request._observer?.end(observationData)
     })
   }

@@ -25,7 +25,7 @@ export const rules = {
   '@typescript-eslint/no-unsafe-member-access': 'warn',
   '@typescript-eslint/no-unsafe-call': 'warn',
   '@typescript-eslint/no-unsafe-return': 'warn',
-  '@typescript-eslint/ban-types': 'error',
+  /*  '@typescript-eslint/ban-types': 'error', */
   '@typescript-eslint/no-misused-promises': 'off',
   '@typescript-eslint/no-redundant-type-constituents': 'off',
   '@typescript-eslint/no-explicit-any': 'off',
@@ -83,11 +83,4 @@ export const rules = {
   'turbo/no-undeclared-env-vars': 'off',
   'unused-imports/no-unused-imports': 'error',
   'unused-imports/no-unused-vars': ['warn', { vars: 'all', varsIgnorePattern: '^_', args: 'after-used', argsIgnorePattern: '^_' }],
-  'react/jsx-uses-vars': 'error',
-  'react/display-name': 'off',
-  /**
-   * @link https://legacy.reactjs.org/blog/2020/09/22/introducing-the-new-jsx-transform.html#eslint
-   */
-  'react/jsx-uses-react': 'off',
-  'react/react-in-jsx-scope': 'off',
 } satisfies Linter.FlatConfig['rules']

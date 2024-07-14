@@ -1,9 +1,10 @@
 import { Client as QuickStatClient } from '@quickstat/core'
-import { PrometheusDataSource, ScrapeStrategy } from '@quickstat/prometheus'
 import { FastifyPlugin } from '@quickstat/fastify'
+import { PrometheusDataSource, ScrapeStrategy } from '@quickstat/prometheus'
 
 import fastify from 'fastify'
 import http from 'http'
+
 import { getRandomStatusCode, simulateRequests } from './utils.js'
 
 const app = fastify()

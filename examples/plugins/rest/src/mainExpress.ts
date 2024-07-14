@@ -1,10 +1,11 @@
 import { Client as QuickStatClient } from '@quickstat/core'
-import { PrometheusDataSource, ScrapeStrategy } from '@quickstat/prometheus'
-import { RestPlugin, RestRequestObserver } from '@quickstat/rest'
-import http from 'http'
-import express from 'express'
-import { getRandomStatusCode, simulateRequests } from './utils.js'
 import { ExpressPlugin } from '@quickstat/expressjs'
+import { PrometheusDataSource, ScrapeStrategy } from '@quickstat/prometheus'
+
+import express from 'express'
+import http from 'http'
+
+import { getRandomStatusCode, simulateRequests } from './utils.js'
 
 const app = express()
 

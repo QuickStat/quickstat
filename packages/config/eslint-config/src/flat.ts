@@ -23,8 +23,6 @@ import eslintPluginRecommended from 'eslint-plugin-eslint-plugin'
 // @ts-ignore
 import importPlugin from 'eslint-plugin-import'
 // @ts-ignore
-import reactPlugin from 'eslint-plugin-react'
-// @ts-ignore
 import simpleImportSortPlugin from 'eslint-plugin-simple-import-sort'
 // @ts-ignore
 import turboPlugin from 'eslint-plugin-turbo'
@@ -47,7 +45,7 @@ import type { ESLint, Linter } from 'eslint'
 // prettier-ignore-end
 
 const recommended = {
-  files: ['**/*.{ts,tsx}'],
+  files: ['**/*.ts'],
   ignores: ignores.all,
   rules: {
     ...eslint.configs.recommended.rules,
@@ -56,13 +54,11 @@ const recommended = {
     ...tsPlugin.configs['eslint-recommended'].overrides[0].rules,
     ...tsPlugin.configs['recommended']?.rules,
     ...tsPlugin.configs['recommended-requiring-type-checking']?.rules,
-    ...reactPlugin.configs['recommended']?.rules,
     ...prettier.rules,
     ...rules,
   },
   plugins: {
     '': eslintPluginRecommended,
-    'react': reactPlugin,
     '@typescript-eslint': tsPlugin,
     vitest: vitestPlugin,
     'vitest-globals': vitestGlobalsPlugin,
@@ -107,9 +103,6 @@ const recommended = {
       typescript: {
         project: true,
       },
-    },
-    react: {
-      version: 'detect',
     },
   },
 } satisfies Linter.FlatConfig

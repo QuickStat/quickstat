@@ -42,7 +42,7 @@
     "@quickstat/eslint-config": "workspace:*",
     "@quickstat/ts-config": "workspace:*",
     "@quickstat/tsup-config": "workspace:*",
-    "eslint": "^8.57.0",
+    "eslint": "^9.7.0",
     "tsup": "^8.0.2",
     "typescript": "^5.4.5"
   },

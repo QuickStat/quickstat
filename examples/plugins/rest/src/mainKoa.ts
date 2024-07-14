@@ -1,9 +1,11 @@
+import { Client as QuickStatClient } from '@quickstat/core'
+import { KoaPlugin } from '@quickstat/koa'
+import { PrometheusDataSource, ScrapeStrategy } from '@quickstat/prometheus'
+
+import http from 'http'
 import Koa from 'koa'
 import Router from 'koa-router'
-import { Client as QuickStatClient } from '@quickstat/core'
-import { PrometheusDataSource, ScrapeStrategy } from '@quickstat/prometheus'
-import { KoaPlugin } from '@quickstat/koa'
-import http from 'http'
+
 import { getRandomStatusCode, simulateRequests } from './utils.js'
 
 const app = new Koa()

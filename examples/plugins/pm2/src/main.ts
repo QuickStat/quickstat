@@ -1,8 +1,10 @@
 import { Client as QuickStatClient } from '@quickstat/core'
 import { Pm2Plugin } from '@quickstat/pm2'
 import { PrometheusDataSource, ScrapeStrategy } from '@quickstat/prometheus'
-import pm2 from 'pm2'
+
 import http from 'http'
+import pm2 from 'pm2'
+
 import { DemoProcessManager } from './pm2/main.js'
 
 // Create QuickStat Client
