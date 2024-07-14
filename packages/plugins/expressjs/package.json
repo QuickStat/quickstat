@@ -47,10 +47,10 @@
     "@quickstat/ts-config": "workspace:*",
     "@quickstat/tsup-config": "workspace:*",
     "@types/express": "^4.17.21",
-    "express": "^4.19.2",
     "eslint": "^9.7.0",
-    "tsup": "^8.0.2",
-    "typescript": "^5.4.5"
+    "express": "^4.19.2",
+    "tsup": "^8.1.0",
+    "typescript": "^5.5.3"
   },
   "packageManager": "pnpm@9.1.4",
   "engines": {
