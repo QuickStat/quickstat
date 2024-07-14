@@ -1,4 +1,18 @@
-export const defaultIgnores = ['dist/**', 'coverage/**', 'mocks/**', '*.d.ts', '*.config.ts', 'templates/**']
+const defaultIgnores = [
+  'dist/**',
+  'dist',
+  '**/dist/**',
+  'coverage/**',
+  '**/coverage/**',
+  'mocks/**',
+  '**/mocks/**',
+  '*.d.ts',
+  '**.d.ts',
+  '**/*.config.ts',
+  '**/__snapshots__/',
+  'templates/**',
+  '**/configs/**',
+]
 
 /**
  * When using in a monorepo(with a `packages` folder) we need to append `**\/`

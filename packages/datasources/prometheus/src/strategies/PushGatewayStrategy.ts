@@ -22,8 +22,7 @@ import * as https from 'node:https'
 import * as url from 'node:url'
 import { gzipSync } from 'node:zlib'
 
-import { PromFileGenerator } from 'src'
-
+import { PromFileGenerator } from '../converters/PromFileGenerator'
 import { BaseStrategy } from './BaseStrategy'
 
 import type { BaseStrategyOptions } from './BaseStrategy'
@@ -178,7 +177,7 @@ export class PushGatewayStrategy extends BaseStrategy<PushGatewayStrategy> {
       return ''
     }
     return Object.keys(groupings)
-      .map(key => `/${encodeURIComponent(key)}/${encodeURIComponent(groupings[key]!)}`)
+      .map(key => `/${encodeURIComponent(key)}/${encodeURIComponent(groupings[key] as string)}`)
       .join('')
   }
 

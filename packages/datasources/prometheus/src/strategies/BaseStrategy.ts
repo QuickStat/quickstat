@@ -1,9 +1,10 @@
-import type { PrometheusDataSource } from 'src/PrometheusDataSource'
+import type { PrometheusDataSource } from '../PrometheusDataSource'
 
 /**
  * The options for the base strategy
  */
-export interface BaseStrategyOptions {}
+// eslint-disable-next-line @typescript-eslint/no-empty-object-type
+export type BaseStrategyOptions = {}
 
 /**
  * The base strategy for the scrape, remote write and push gateway strategies

@@ -5,7 +5,7 @@ import type { BaseStrategyOptions } from './BaseStrategy'
 /**
  * The options for the remote write strategy
  */
-export interface RemoteWriteStrategyOptions extends BaseStrategyOptions {}
+export type RemoteWriteStrategyOptions = BaseStrategyOptions
 
 /**
  * The remote write strategy for persisting the metrics

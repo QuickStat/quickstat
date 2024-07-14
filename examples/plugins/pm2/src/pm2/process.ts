@@ -5,7 +5,7 @@
  */
 export function allocateRandomMemory() {
   const size = Math.floor(Math.random() * 1000000) // Random size up to 1MB
-  const arr = new Array(size).fill('x') // Allocate memory
+  const arr = new Array(size).fill('x') as string[] // Allocate memory
   console.log(`Allocated ${size} bytes of memory`)
   return arr
 }

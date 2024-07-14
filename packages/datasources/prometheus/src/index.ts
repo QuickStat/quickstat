@@ -9,6 +9,3 @@ export * from './strategies/ScrapeStrategy'
 
 // Data Source
 export * from './PrometheusDataSource'
-
-// Types
-export * from './shared/types'

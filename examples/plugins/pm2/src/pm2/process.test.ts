@@ -1,5 +1,6 @@
 // Import the function to test
-import { vi, describe, it, expect } from 'vitest'
+import { describe, expect, it, vi } from 'vitest'
+
 import { allocateRandomMemory } from './process.js'
 
 // Mock console.log to prevent output during tests

@@ -1,5 +1,7 @@
-import { RestPlugin, RestRequestObserver, type ObserveRestRequestOptions, type RestPluginOptions } from '@quickstat/rest'
-import type { Request, Response, NextFunction, Express } from 'express'
+import { RestPlugin, RestRequestObserver } from '@quickstat/rest'
+
+import type { ObserveRestRequestOptions, RestPluginOptions } from '@quickstat/rest'
+import type { Express, NextFunction, Request, Response } from 'express'
 
 /** The options for the express plugin */
 export type ExpressPluginOptions = RestPluginOptions & {
@@ -51,7 +53,9 @@ export class ExpressPlugin extends RestPlugin {
    * @returns The observation data
    */
   private getObservationData(req: Request, res: Response) {
-    const path = req.route?.path || req.path
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
+    const path = req.route?.path as string || req.path
+
     return {
       method: req.method as ObserveRestRequestOptions['method'],
       path: path,

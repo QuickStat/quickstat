@@ -20,7 +20,6 @@ const config: Linter.Config = {
     'turbo',
     'plugin:@typescript-eslint/recommended-type-checked',
     'plugin:@typescript-eslint/stylistic-type-checked',
-    'plugin:react/recommended',
     'prettier',
   ],
   plugins: ['@typescript-eslint', 'vitest', 'vitest-globals', 'unused-imports', 'import', 'simple-import-sort', 'turbo'],
@@ -65,9 +64,6 @@ const config: Linter.Config = {
       typescript: {
         project: 'packages/*/tsconfig.json',
       },
-    },
-    react: {
-      version: 'detect',
     },
   },
 }

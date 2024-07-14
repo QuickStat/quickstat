@@ -1,5 +1,4 @@
-import { PromFileGenerator } from 'src'
-
+import { PromFileGenerator } from '../converters/PromFileGenerator'
 import { BaseStrategy } from './BaseStrategy'
 
 import type { BaseStrategyOptions } from './BaseStrategy'
@@ -7,9 +6,7 @@ import type { BaseStrategyOptions } from './BaseStrategy'
 /**
  * The options for the scrape strategy
  */
-export interface ScrapeStrategyOptions extends BaseStrategyOptions {
-}
-
+export type ScrapeStrategyOptions = BaseStrategyOptions
 /**
  * The scrape strategy for collecting the metrics
  * @template ST The type of the strategy
