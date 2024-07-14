@@ -29,7 +29,7 @@
     "install:csb": "corepack enable && pnpm install --frozen-lockfile",
     "lint": "eslint --format pretty",
     "lint:case": "npx case-police --fix",
-    "lint:ci": "eslint --max-warnings 10 --format pretty",
+    "lint:ci": "turbo run build && eslint --max-warnings 10 --format pretty",
     "lint:fix": "eslint --fix --format pretty && bun run lint:case",
     "lint:turbo": "turbo run lint",
     "version": "changeset version",
