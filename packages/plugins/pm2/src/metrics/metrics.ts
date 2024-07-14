@@ -1,4 +1,4 @@
-import { createInstanceFromRawMetric, getLabelsFromRecord,NativeMetricTypes } from '@quickstat/core'
+import { createInstanceFromRawMetric, getLabelsFromRecord, NativeMetricTypes } from '@quickstat/core'
 
 import type { RawMetricType } from '@quickstat/core'
 

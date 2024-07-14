@@ -12,7 +12,7 @@ export function getObservationData(req: Request, res: Response): ObserveRestRequ
   return {
     method: req.method as ObserveRestRequestOptions['method'],
     // @TODO use path params to automatically replace the ids
-    path: req.path.replace(/\d+/g, ':id'),
+    path: req.route.path, // get the path with variables,
     status: res.statusCode,
     size: {
       request: req.socket.bytesRead,

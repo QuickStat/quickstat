@@ -387,7 +387,7 @@
             "uid": "PBFA97CFB590B2093"
           },
           "editorMode": "code",
-          "expr": "sum(rate(rest_request_sum{application=\"$application\", status=~\"4.*\"}[$__interval])) or vector(0)",
+          "expr": "sum(rate(rest_request_sum{application=\"$application\", status=~\"4.*\"}[$__interval]))",
           "instant": false,
           "legendFormat": "__auto",
           "range": true,
@@ -459,7 +459,7 @@
             "uid": "PBFA97CFB590B2093"
           },
           "editorMode": "code",
-          "expr": "sum(rate(rest_request_sum{application=\"$application\", status=~\"5.*\"}[$__interval])) or vector(0)",
+          "expr": "sum(rate(rest_request_sum{application=\"$application\", status=~\"5.*\"}[$__interval]))",
           "instant": false,
           "legendFormat": "__auto",
           "range": true,
