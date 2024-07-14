@@ -34,8 +34,8 @@
   },
   "devDependencies": {
     "@quickstat/ts-config": "workspace:*",
-    "@types/node": "^20.12.7",
-    "tsup": "^8.0.2"
+    "@types/node": "^20.14.10",
+    "tsup": "^8.1.0"
   },
   "peerDependencies": {
     "tsup": "^8.0.2"
