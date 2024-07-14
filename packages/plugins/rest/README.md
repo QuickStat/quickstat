@@ -106,8 +106,7 @@ app.get('/users/:id/todos', (req, res) => {
 function getObservationData(req: Request, res: Response): ObserveRestRequestOptions {
   return {
     method: req.method as ObserveRestRequestOptions['method'],
-    // @TODO use path params to automatically replace the ids
-    path: req.path.replace(/\d+/g, ':id'),
+    path: req.route.path, // get the path with variables
     status: res.statusCode,
     size: {
       request: req.socket.bytesRead,
@@ -127,7 +126,7 @@ After setting up the code, start the application. The metrics will be available 
 
 The example above uses the PrometheusDataSource with the ScrapeStrategy. The ScrapeStrategy exposes the prometheus file on the given endpoint for being scraped from prometheus. You can also use the PushGatewayStrategy to push the metrics to the PushGateway of Prometheus.
 
-If you would like to use other data sources, you can take a look at the available data sources in the [@quickstat/core package](https://github.com/QuickStat/quickstat?tab=readme-ov-file#data-sources)
+If you would like to use other data sources, you can take a look at the available data sources in the [@quickstat/core](https://github.com/QuickStat/quickstat?tab=readme-ov-file#data-sources) package.
 
 ### Plugin
 
