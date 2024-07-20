@@ -361,6 +361,31 @@ importers:
         specifier: ^5.5.3
         version: 5.5.3
 
+  packages/plugins/nodejs:
+    dependencies:
+      '@quickstat/core':
+        specifier: workspace:*
+        version: link:../../core
+    devDependencies:
+      '@quickstat/eslint-config':
+        specifier: workspace:*
+        version: link:../../config/eslint-config
+      '@quickstat/ts-config':
+        specifier: workspace:*
+        version: link:../../config/ts-config
+      '@quickstat/tsup-config':
+        specifier: workspace:*
+        version: link:../../config/tsup-config
+      eslint:
+        specifier: ^9.7.0
+        version: 9.7.0
+      tsup:
+        specifier: ^8.1.0
+        version: 8.1.0(postcss@8.4.35)(ts-node@10.9.2(@types/node@20.14.10)(typescript@5.5.3))(typescript@5.5.3)
+      typescript:
+        specifier: ^5.5.3
+        version: 5.5.3
+
   packages/plugins/pm2:
     dependencies:
       '@quickstat/core':
