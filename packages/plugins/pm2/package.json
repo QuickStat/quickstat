@@ -48,7 +48,7 @@
     "eslint": "^9.7.0",
     "pm2": "^5.4.2",
     "tsup": "^8.1.0",
-    "typescript": "^5.5.3"
+    "typescript": "^5.5.4"
   },
   "packageManager": "pnpm@9.1.4",
   "engines": {
