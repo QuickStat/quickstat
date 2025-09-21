@@ -1,0 +1,57 @@
+{
+  "name": "@quickstat/demo-plugins-nodejs",
+  "private": true,
+  "version": "0.0.1",
+  "description": "Demo",
+  "repository": {
+    "type": "git",
+    "url": "git://https://github.com/QuickStat/quickstat.git",
+    "directory": "examples/plugins/nodejs"
+  },
+  "license": "Apache-2.0",
+  "author": "DxLoop",
+  "sideEffects": false,
+  "type": "module",
+  "exports": {
+    ".": {
+      "import": "./dist/index.js",
+      "require": "./dist/index.cjs",
+      "default": "./dist/index.cjs"
+    },
+    "./package.json": "./package.json",
+    "./*": "./*"
+  },
+  "main": "dist/index.cjs",
+  "module": "dist/index.js",
+  "types": "./dist/index.d.ts",
+  "files": [
+    "src",
+    "dist"
+  ],
+  "scripts": {
+    "build": "tsc -p ./tsconfig.json",
+    "clean": "npx rimraf ./dist",
+    "lint": "eslint --format pretty .",
+    "lint-fix": "bun run lint --quiet --fix",
+    "start": "tsc --watch",
+    "start:main": "node ./dist/main.js",
+    "test": "vitest --passWithNoTests",
+    "typecheck": "tsc -p ./tsconfig.json --noEmit --emitDeclarationOnly false"
+  },
+  "dependencies": {
+    "@quickstat/core": "workspace:*",
+    "@quickstat/nodejs": "workspace:*",
+    "@quickstat/prometheus": "workspace:*"
+  },
+  "devDependencies": {
+    "@quickstat/eslint-config": "workspace:*",
+    "eslint": "^9.7.0",
+    "typescript": "^5.5.3"
+  },
+  "peerDependencies": {
+    "typescript": "^5.5.3"
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}
