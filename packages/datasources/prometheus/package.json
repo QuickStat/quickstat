@@ -1,6 +1,6 @@
 {
   "name": "@quickstat/prometheus",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "Prometheus datasource for QuickStat",
   "repository": {
     "type": "git",

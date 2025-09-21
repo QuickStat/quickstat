@@ -19,6 +19,11 @@ jobs:
       name: Release
       timeout-minutes: 15
       runs-on: ubuntu-latest
+      permissions:
+        id-token: write
+        contents: write
+        issues: write
+        pull-requests: write
       steps:
         - name: Check out code
           uses: actions/checkout@v4
@@ -42,7 +47,7 @@ jobs:
           env:
             NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
             NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
-            GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
+            GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
         - name: Publish ${{ inputs.tag || 'canary' }}
           if: steps.changesets.outputs.published != 'true'
@@ -52,4 +57,4 @@ jobs:
             pnpm run release:canary --tag ${{ inputs.tag || 'canary' }}
           env:
             NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
-            GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
+            GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

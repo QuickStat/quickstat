@@ -1,6 +1,6 @@
 {
   "name": "@quickstat/core",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "QuickStat simplifies tracking for different libraries or even manual entries. Visualize data in Grafana, store in databases, or scrape via Prometheus.",
   "repository": {
     "type": "git",
