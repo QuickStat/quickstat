@@ -1,6 +1,6 @@
 {
   "name": "@quickstat/pm2",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Effortlessly monitor PM2 key metrics and export it to prometheus for visualizing it in Grafana",
   "repository": {
     "type": "git",
