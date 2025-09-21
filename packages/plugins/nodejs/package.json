@@ -1,0 +1,83 @@
+{
+  "name": "@quickstat/nodejs",
+  "version": "0.0.1",
+  "description": "Effortlessly monitor Node.js metrics and export them to Prometheus for visualization in Grafana",
+  "repository": {
+    "type": "git",
+    "url": "git://https://github.com/QuickStat/quickstat.git",
+    "directory": "packages/plugins/nodejs"
+  },
+  "license": "Apache-2.0",
+  "author": "DxLoop",
+  "sideEffects": false,
+  "type": "module",
+  "exports": {
+    ".": {
+      "import": "./dist/index.js",
+      "require": "./dist/index.cjs",
+      "default": "./dist/index.cjs"
+    },
+    "./package.json": "./package.json",
+    "./*": "./*"
+  },
+  "main": "dist/index.cjs",
+  "module": "dist/index.js",
+  "types": "./dist/index.d.ts",
+  "files": [
+    "src",
+    "dist"
+  ],
+  "scripts": {
+    "build": "tsup",
+    "clean": "npx rimraf ./dist",
+    "lint": "eslint --format pretty .",
+    "lint-fix": "bun run lint --quiet --fix",
+    "release": "pnpm publish --no-git-check",
+    "release:canary": "bash ../../.github/canary.sh && node ../../scripts/build.js canary && pnpm publish --no-git-check",
+    "start": "tsup --watch",
+    "test": "vitest --passWithNoTests",
+    "typecheck": "tsc -p ./tsconfig.json --noEmit --emitDeclarationOnly false"
+  },
+  "dependencies": {
+    "@quickstat/core": "workspace:*"
+  },
+  "devDependencies": {
+    "@quickstat/eslint-config": "workspace:*",
+    "@quickstat/ts-config": "workspace:*",
+    "@quickstat/tsup-config": "workspace:*",
+    "@types/node": "^20.14.10",
+    "eslint": "^9.7.0",
+    "tsup": "^8.1.0",
+    "typescript": "^5.5.3"
+  },
+  "packageManager": "pnpm@9.1.4",
+  "engines": {
+    "node": ">=18",
+    "pnpm": ">=9.1.4"
+  },
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org/"
+  },
+  "keywords": [
+    "process",
+    "node",
+    "nodejs",
+    "stats",
+    "service",
+    "metrics",
+    "monitor",
+    "monitoring",
+    "performance",
+    "node.js",
+    "plugin",
+    "track",
+    "tracking",
+    "statistics",
+    "analytics",
+    "visualization",
+    "dashboard",
+    "grafana",
+    "prometheus"
+  ]
+}

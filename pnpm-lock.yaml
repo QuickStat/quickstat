@@ -57,6 +57,28 @@ importers:
         specifier: ^1.6.0
         version: 1.6.0(@types/node@20.14.10)(@vitest/ui@1.6.0(vitest@1.6.0))
 
+  examples/plugins/nodejs:
+    dependencies:
+      '@quickstat/core':
+        specifier: workspace:*
+        version: link:../../../packages/core
+      '@quickstat/nodejs':
+        specifier: workspace:*
+        version: link:../../../packages/plugins/nodejs
+      '@quickstat/prometheus':
+        specifier: workspace:*
+        version: link:../../../packages/datasources/prometheus
+    devDependencies:
+      '@quickstat/eslint-config':
+        specifier: workspace:*
+        version: link:../../../packages/config/eslint-config
+      eslint:
+        specifier: ^9.7.0
+        version: 9.7.0
+      typescript:
+        specifier: ^5.5.3
+        version: 5.5.3
+
   examples/plugins/pm2:
     dependencies:
       '@quickstat/core':
@@ -354,6 +376,34 @@ importers:
       koa:
         specifier: ^2.15.3
         version: 2.15.3
+      tsup:
+        specifier: ^8.1.0
+        version: 8.1.0(postcss@8.4.35)(ts-node@10.9.2(@types/node@20.14.10)(typescript@5.5.3))(typescript@5.5.3)
+      typescript:
+        specifier: ^5.5.3
+        version: 5.5.3
+
+  packages/plugins/nodejs:
+    dependencies:
+      '@quickstat/core':
+        specifier: workspace:*
+        version: link:../../core
+    devDependencies:
+      '@quickstat/eslint-config':
+        specifier: workspace:*
+        version: link:../../config/eslint-config
+      '@quickstat/ts-config':
+        specifier: workspace:*
+        version: link:../../config/ts-config
+      '@quickstat/tsup-config':
+        specifier: workspace:*
+        version: link:../../config/tsup-config
+      '@types/node':
+        specifier: ^20.14.10
+        version: 20.14.10
+      eslint:
+        specifier: ^9.7.0
+        version: 9.7.0
       tsup:
         specifier: ^8.1.0
         version: 8.1.0(postcss@8.4.35)(ts-node@10.9.2(@types/node@20.14.10)(typescript@5.5.3))(typescript@5.5.3)
@@ -1940,6 +1990,7 @@ packages:
   eslint@8.57.0:
     resolution: {integrity: sha512-dZ6+mexnaTIbSBZWgou51U6OmzIhYM2VcNdtiTtI7qPNZm35Akpr0f6vtw3w1Kmn5PYo+tZVfh13WrhpS6oLqQ==}
     engines: {node: ^12.22.0 || ^14.17.0 || >=16.0.0}
+    deprecated: This version is no longer supported. Please see https://eslint.org/version-support for other options.
     hasBin: true
 
   eslint@9.7.0:

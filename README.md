@@ -32,7 +32,7 @@ npm install @quickstat/core
 npm install @quickstat/pm2
 npm install @quickstat/expressjs
 # - npm install @quickstat/fastify (for Fastify Stats)
-npm install @quickstat/node.js
+npm install @quickstat/nodejs
 ```
 
 3. **Install DataSource**: Install the QuickStat data source which will be also invoked from grafana. For example, if you're using Prometheus, you can install the Prometheus data source as follows:
@@ -129,7 +129,7 @@ Each plugin comes with various configuration options, and by following the hyper
 | [@quickstat/expressjs](./packages/plugins/expressjs/README.md) | Provides metrics for Express.js    | Request count, Response time, Error count etc. |
 | [@quickstat/fastify](./packages/plugins/fastify/README.md)     | Provides metrics for Fastify       | Request count, Response time, Error count etc. |
 | [@quickstat/koa](./packages/plugins/koa/README.md)             | Provides metrics for Koa           | Request count, Response time, Error count etc. |
-| [@quickstat/node.js]()                                         | Provides metrics for Node.js       | Event loop delay, Memory usage, CPU usage etc. |
+| [@quickstat/nodejs](./packages/plugins/nodejs/README.md)       | Provides metrics for Node.js       | Event loop delay, Memory usage, CPU usage etc. |
 
 We are continuously working on expanding our collection of plugins to cover more libraries and services. If you have any suggestions for new plugins or would like to contribute your own plugin, feel free to open an issue on our GitHub repository or submit a pull request.
 

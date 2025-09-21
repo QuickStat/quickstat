@@ -58,7 +58,7 @@ npm run start:fastify # Fastify Application
 npm run start:koa     # Koa Application
 ```
 
-After the application has been started the metrics will be exposed at `http://localhost:3242`, ready for scraping by Prometheus.Furthermore a simple rest api is exposed at `http://localhost:3032`, where requests will be executed in order to generate metrics.
+After the application has been started the metrics will be exposed at `http://localhost:3242`, ready for scraping by Prometheus. Furthermore a simple rest api is exposed at `http://localhost:3032`, where requests will be executed in order to generate metrics.
 
 # Disclaimer
 
