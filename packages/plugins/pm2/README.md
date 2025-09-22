@@ -4,8 +4,8 @@ The QuickStat PM2 Plugin offers seamless integration with PM2 instances, allowin
 
 If you are new to QuickStat and its component, feel free to check the [official documentation](https://www.npmjs.com/package/@quickstat/core) for a detailed breakdown.
 
-![](../../../examples/plugins/pm2/assets/pm2_grafana_all_table.png)
-![](../../../examples/plugins/pm2/assets/pm2_grafana_all_single.png)
+![](https://raw.githubusercontent.com/QuickStat/quickstat/refs/heads/master/examples/plugins/pm2/assets/pm2_grafana_all_table.png)
+![](https://raw.githubusercontent.com/QuickStat/quickstat/refs/heads/master/examples/plugins/pm2/assets/pm2_grafana_all_single.png)
 
 ## Installation
 

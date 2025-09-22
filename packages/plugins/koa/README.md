@@ -2,8 +2,8 @@
 
 The QuickStat Koa Plugin provides seamless integration for monitoring REST metrics in Koa applications. It exports these metrics to Prometheus, enabling visualization in Grafana dashboards.
 
-![](../../../examples/plugins/rest/assets/rest_grafana_overview.png)
-![](../../../examples/plugins/rest/assets/rest_grafana_distribution.png)
+![](https://raw.githubusercontent.com/QuickStat/quickstat/refs/heads/master/examples/plugins/rest/assets/rest_grafana_overview.png)
+![](https://raw.githubusercontent.com/QuickStat/quickstat/refs/heads/master/examples/plugins/rest/assets/rest_grafana_distribution.png)
 
 If you are new to QuickStat and its components, feel free to check the [official documentation](https://www.npmjs.com/package/@quickstat/core) for a detailed breakdown.
 

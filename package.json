@@ -1,6 +1,6 @@
 {
   "name": "quickstat",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "QuickStat simplifies tracking for different libraries or even manual entries. Visualize data in Grafana, store in databases, or scrape via Prometheus.",
   "license": "Apache-2.0",
   "author": "DxLoop",

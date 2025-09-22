@@ -2,8 +2,8 @@
 
 The QuickStat Node.js Plugin offers seamless integration with Node.js runtime, allowing effortless monitoring of key runtime metrics. It exports these metrics to Prometheus, enabling visualization in Grafana dashboards for comprehensive Node.js application performance monitoring.
 
-![](../../../examples/plugins/nodejs/assets/nodejs_grafana_overview.png)
-![](../../../examples/plugins/nodejs/assets/nodejs_other_metrics.png)
+![](https://raw.githubusercontent.com/QuickStat/quickstat/refs/heads/master/examples/plugins/nodejs/assets/nodejs_grafana_overview.png)
+![](https://raw.githubusercontent.com/QuickStat/quickstat/refs/heads/master/examples/plugins/nodejs/assets/nodejs_other_metrics.png)
 
 If you are new to QuickStat and its components, feel free to check the [official documentation](https://www.npmjs.com/package/@quickstat/core) for a detailed breakdown.
 
@@ -35,7 +35,7 @@ If you want to set up Prometheus and Grafana manually, follow the steps below:
 
 ### 2. Import Dashboard to Grafana
 
-Once Prometheus and Grafana are set up, you can add [following Dashboard](https://grafana.com/orgs/dxloop/dashboards/24130). Navigate to the Grafana dashboard page, click on "Import" and paste the dashboard template URL. Then, customize the dashboard as needed.
+Once Prometheus and Grafana are set up, you can add [following Dashboard](https://grafana.com/grafana/dashboards/24130). Navigate to the Grafana dashboard page, click on "Import" and paste the dashboard template URL. Then, customize the dashboard as needed.
 
 ### 3. Expose Node.js Runtime Metrics
 

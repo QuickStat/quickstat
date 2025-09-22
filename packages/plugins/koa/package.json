@@ -1,6 +1,6 @@
 {
   "name": "@quickstat/koa",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "Effortlessly monitor koa rest metrics and export them to Prometheus for visualization in Grafana",
   "repository": {
     "type": "git",

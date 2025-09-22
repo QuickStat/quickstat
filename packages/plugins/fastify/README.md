@@ -4,8 +4,8 @@ The QuickStat Fastify Plugin provides seamless integration for monitoring REST m
 
 If you are new to QuickStat and its components, feel free to check the [official documentation](https://www.npmjs.com/package/@quickstat/core) for a detailed breakdown.
 
-![](../../../examples/plugins/rest/assets/rest_grafana_overview.png)
-![](../../../examples/plugins/rest/assets/rest_grafana_distribution.png)
+![](https://raw.githubusercontent.com/QuickStat/quickstat/refs/heads/master/examples/plugins/rest/assets/rest_grafana_overview.png)
+![](https://raw.githubusercontent.com/QuickStat/quickstat/refs/heads/master/examples/plugins/rest/assets/rest_grafana_distribution.png)
 
 **If one of the following frameworks is being used, the dedicated plugins should be used instead of the Fastify plugin:**
 

@@ -157,6 +157,7 @@ The client serves as the main component for managing metrics, collecting data, a
 
 QuickStat offers a range of examples to help you get started with monitoring your metrics. These examples cover various use cases and demonstrate how to integrate QuickStat with different libraries and frameworks.
 
+- [Node.js Plugin Example](./examples/plugins/nodejs/README.md)
 - [PM2 Plugin Example](./examples/plugins/pm2/README.md)
 - [REST Plugin Example](./examples/plugins/rest/README.md)
   - [Express.js Plugin Example](./examples/plugins/rest/src/mainExpress.ts)

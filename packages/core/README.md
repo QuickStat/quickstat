@@ -114,6 +114,369 @@ The provided Metrics adhere to the OpenMetrics Specification. The metric classes
 
 Click on the hyperlinks to get a detailed understanding of the usage and examples for each metric.
 
+## Custom Metrics
+
+QuickStat allows you to create and register custom metrics to track application-specific data. This section provides comprehensive examples and guidance on how to create, register, and use custom metrics effectively.
+
+### Creating Custom Metrics
+
+#### Single Counter
+
+Use single counters to track cumulative values that only increase over time without labels.
+
+```javascript
+import { SingleCounter } from '@quickstat/core'
+
+// Create a counter to track total requests
+const totalRequestsCounter = new SingleCounter({
+  name: 'total_requests',
+  description: 'Total number of HTTP requests received',
+})
+
+// Increment the counter
+totalRequestsCounter.inc() // Increment by 1
+totalRequestsCounter.inc(5) // Increment by 5
+
+// Set a specific value
+totalRequestsCounter.set(100)
+
+// Get current value
+const currentValue = totalRequestsCounter.getValue()
+```
+
+#### Multi Counter
+
+Use multi counters to track cumulative values with multiple labels for categorization.
+
+```javascript
+import { MultiCounter } from '@quickstat/core'
+
+// Create a counter to track requests by method and status code
+const requestsCounter = new MultiCounter({
+  name: 'http_requests',
+  description: 'Number of HTTP requests by method and status code',
+  labels: ['method', 'status_code'],
+})
+
+// Increment with labels
+requestsCounter.inc(['GET', '200']) // Increment by 1
+requestsCounter.inc(['POST', '201'], 3) // Increment by 3
+
+// Set specific values
+requestsCounter.set(['GET', '404'], 10)
+
+// Get values
+const totalValue = requestsCounter.getValue() // Total across all labels
+const getRequests = requestsCounter.getValue(['GET', '200']) // Specific labels
+```
+
+#### Single Gauge
+
+Use single gauges to track values that can go up or down without labels.
+
+```javascript
+import { SingleGauge } from '@quickstat/core'
+
+// Create a gauge to track memory usage
+const memoryUsageGauge = new SingleGauge({
+  name: 'memory_usage_bytes',
+  description: 'Current memory usage in bytes',
+})
+
+// Set value
+memoryUsageGauge.set(1048576) // 1MB
+
+// Increment and decrement
+memoryUsageGauge.inc(1024) // Increase by 1KB
+memoryUsageGauge.dec(512) // Decrease by 512 bytes
+
+// Get current value
+const currentMemory = memoryUsageGauge.getValue()
+```
+
+#### Multi Gauge
+
+Use multi gauges to track values that can go up or down with multiple labels.
+
+```javascript
+import { MultiGauge } from '@quickstat/core'
+
+// Create a gauge to track active connections per service
+const activeConnectionsGauge = new MultiGauge({
+  name: 'active_connections',
+  description: 'Number of active connections per service',
+  labels: ['service', 'protocol'],
+})
+
+// Set values
+activeConnectionsGauge.set(['api', 'http'], 50)
+activeConnectionsGauge.set(['database', 'tcp'], 10)
+
+// Increment and decrement
+activeConnectionsGauge.inc(['api', 'http'], 5) // Add 5 connections
+activeConnectionsGauge.dec(['api', 'http'], 2) // Remove 2 connections
+
+// Get values
+const totalConnections = activeConnectionsGauge.getValue()
+const apiConnections = activeConnectionsGauge.getValue(['api', 'http'])
+```
+
+#### Single Histogram
+
+Use single histograms to observe the distribution of values without labels.
+
+```javascript
+import { SingleHistogram } from '@quickstat/core'
+
+// Create a histogram to track request duration
+const requestDurationHistogram = new SingleHistogram({
+  name: 'request_duration_seconds',
+  description: 'HTTP request duration in seconds',
+  buckets: [0.1, 0.3, 0.5, 1.0, 2.5, 5.0, 10.0], // Define buckets
+})
+
+// Observe values
+requestDurationHistogram.observe(0.25) // 250ms request
+requestDurationHistogram.observe(1.5) // 1.5s request
+
+// Observe in specific bucket (advanced usage)
+requestDurationHistogram.observeBucket(0.8, 1.0)
+
+// Get statistics
+const totalSum = requestDurationHistogram.getSum() // Total time across all requests
+const fastRequests = requestDurationHistogram.getCount(0.5) // Requests under 500ms
+```
+
+#### Multi Histogram
+
+Use multi histograms to observe the distribution of values with multiple labels.
+
+```javascript
+import { MultiHistogram } from '@quickstat/core'
+
+// Create a histogram to track request duration by endpoint and method
+const requestDurationHistogram = new MultiHistogram({
+  name: 'http_request_duration_seconds',
+  description: 'HTTP request duration in seconds by endpoint and method',
+  labels: ['endpoint', 'method'],
+  buckets: [0.001, 0.01, 0.1, 1.0, 10.0],
+})
+
+// Observe values with labels
+requestDurationHistogram.observe(['/api/users', 'GET'], 0.05)
+requestDurationHistogram.observe(['/api/users', 'POST'], 0.15)
+
+// Get statistics
+const totalSum = requestDurationHistogram.getSum(['/api/users', 'GET'])
+const fastGetRequests = requestDurationHistogram.getCount(['/api/users', 'GET'], 0.1)
+```
+
+### Advanced Metric Options
+
+#### Metric Callbacks
+
+You can define callbacks that execute when metrics are collected:
+
+```javascript
+import { SingleCounter } from '@quickstat/core'
+
+const requestCounter = new SingleCounter({
+  name: 'requests_processed',
+  description: 'Number of requests processed',
+  onCollect: (metric) => {
+    console.log(`Collecting metric: ${metric.name}`)
+    // Perform custom logic before collection
+  },
+  afterCollect: (metric) => {
+    console.log(`Metric collected: ${metric.name}`)
+    // Perform custom logic after collection
+  },
+})
+```
+
+#### Reset Options
+
+Configure automatic reset intervals for metrics:
+
+```javascript
+import { SingleCounter } from '@quickstat/core'
+
+const requestCounter = new SingleCounter({
+  name: 'requests_per_minute',
+  description: 'Number of requests in the current minute',
+  value: 0, // Initial value
+  reset: {
+    interval: 60000, // Reset every 60 seconds
+    value: (counter) => {
+      console.log(`Resetting counter. Previous value: ${counter.getValue()}`)
+      counter.value = 0 // Custom reset logic
+    },
+  },
+})
+```
+
+#### Initial Values
+
+Set initial values for metrics:
+
+```javascript
+import { MultiGauge } from '@quickstat/core'
+
+const resourceGauge = new MultiGauge({
+  name: 'resource_allocation',
+  description: 'Current resource allocation by type',
+  labels: ['resource_type'],
+  value: 100, // Initial total value
+  values: [
+    { labels: ['cpu'], value: 50, sum: 50 },
+    { labels: ['memory'], value: 30, sum: 30 },
+    { labels: ['storage'], value: 20, sum: 20 },
+  ],
+})
+```
+
+### Registering Custom Metrics
+
+#### Individual Registration
+
+Register metrics one by one:
+
+```javascript
+import { Client as QuickStatClient, SingleCounter, MultiGauge } from '@quickstat/core'
+
+const client = new QuickStatClient({
+  metrics: [],
+  plugins: [],
+})
+
+// Create custom metrics
+const requestCounter = new SingleCounter({
+  name: 'custom_requests',
+  description: 'Custom request counter',
+})
+
+const memoryGauge = new MultiGauge({
+  name: 'custom_memory',
+  description: 'Custom memory gauge',
+  labels: ['process'],
+})
+
+// Register metrics
+client.registerMetric(requestCounter)
+client.registerMetric(memoryGauge)
+```
+
+#### Batch Registration
+
+Register multiple metrics at once:
+
+```javascript
+import { Client as QuickStatClient, SingleCounter, SingleGauge, SingleHistogram } from '@quickstat/core'
+
+// Create metrics array
+const customMetrics = [
+  new SingleCounter({
+    name: 'batch_requests',
+    description: 'Batch request counter',
+  }),
+  new SingleGauge({
+    name: 'batch_memory',
+    description: 'Batch memory gauge',
+  }),
+  new SingleHistogram({
+    name: 'batch_response_time',
+    description: 'Batch response time histogram',
+    buckets: [0.1, 0.5, 1.0, 2.0, 5.0],
+  }),
+]
+
+const client = new QuickStatClient({
+  metrics: customMetrics,
+  plugins: [],
+})
+
+// Or register after client creation
+client.registerMetrics(customMetrics)
+```
+
+### Using Custom Metrics in Your Application
+
+#### Integration Example
+
+Here's a complete example of integrating custom metrics into an Express.js application:
+
+```javascript
+import express from 'express'
+import { Client as QuickStatClient, SingleCounter, SingleHistogram, MultiGauge } from '@quickstat/core'
+import { PrometheusDataSource, ScrapeStrategy } from '@quickstat/prometheus'
+
+const app = express()
+
+// Create custom metrics
+const customRequestCounter = new SingleCounter({
+  name: 'custom_total_requests',
+  description: 'Total number of custom requests',
+})
+
+const customResponseTimeHistogram = new SingleHistogram({
+  name: 'custom_response_time_seconds',
+  description: 'Custom response time in seconds',
+  buckets: [0.001, 0.01, 0.1, 1.0, 10.0],
+})
+
+const customActiveUsersGauge = new MultiGauge({
+  name: 'custom_active_users',
+  description: 'Number of active users by session type',
+  labels: ['session_type'],
+})
+
+// Create QuickStat client with custom metrics
+const quickStatClient = new QuickStatClient({
+  metrics: [
+    customRequestCounter,
+    customResponseTimeHistogram,
+    customActiveUsersGauge,
+  ],
+  plugins: [], // Add other plugins as needed
+  dataSource: new PrometheusDataSource({
+    strategy: new ScrapeStrategy(),
+  }),
+})
+
+// Middleware to track custom metrics
+app.use((req, res, next) => {
+  const startTime = Date.now()
+
+  // Increment request counter
+  customRequestCounter.inc()
+
+  res.on('finish', () => {
+    // Track response time
+    const duration = (Date.now() - startTime) / 1000
+    customResponseTimeHistogram.observe(duration)
+  })
+
+  next()
+})
+
+// Route with custom metric updates
+app.get('/login', (req, res) => {
+  // Simulate user login
+  customActiveUsersGauge.inc(['web'], 1)
+  res.json({ message: 'User logged in' })
+})
+
+app.get('/logout', (req, res) => {
+  // Simulate user logout
+  customActiveUsersGauge.dec(['web'], 1)
+  res.json({ message: 'User logged out' })
+})
+
+app.listen(3000, () => {
+  console.log('Server started on port 3000')
+})
+```
+
 ### Plugins
 
 QuickStat offers a range of plugins that are separately installable packages. This section includes both official plugins provided by QuickStat and unofficial ones contributed by the community.
@@ -157,11 +520,12 @@ The client serves as the main component for managing metrics, collecting data, a
 
 QuickStat offers a range of examples to help you get started with monitoring your metrics. These examples cover various use cases and demonstrate how to integrate QuickStat with different libraries and frameworks.
 
-- [PM2 Plugin Example](./examples/plugins/pm2/README.md)
-- [REST Plugin Example](./examples/plugins/rest/README.md)
-  - [Express.js Plugin Example](./examples/plugins/rest/src/mainExpress.ts)
-  - [Fastify Plugin Example](./examples/plugins/rest/src/mainFastify.ts)
-  - [Koa Plugin Example](./examples/plugins/rest/src/mainKoa.ts)
+- [Node.js Plugin Example](https://github.com/QuickStat/quickstat/blob/master/examples/plugins/nodejs/README.md)
+- [PM2 Plugin Example](https://github.com/QuickStat/quickstat/blob/master/examples/plugins/pm2/README.md)
+- [REST Plugin Example](https://github.com/QuickStat/quickstat/blob/master/examples/plugins/rest/README.md)
+  - [Express.js Plugin Example](https://github.com/QuickStat/quickstat/blob/master/examples/plugins/rest/src/mainExpress.ts)
+  - [Fastify Plugin Example](https://github.com/QuickStat/quickstat/blob/master/examples/plugins/rest/src/mainFastify.ts)
+  - [Koa Plugin Example](https://github.com/QuickStat/quickstat/blob/master/examples/plugins/rest/src/mainKoa.ts)
 
 ## Roadmap
 

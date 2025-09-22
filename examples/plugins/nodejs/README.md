@@ -4,7 +4,7 @@ To quickly set up and run the Node.js Plugin example, follow the steps below.
 
 ## Grafana Dashboard
 
-The dashboard is located under `./docker/grafana/provisioning/dashboards/nodejs.json`, which also has been published to [Grafana's Dashboard Hub](https://grafana.com/orgs/dxloop/dashboards/24130).
+The dashboard is located under `./docker/grafana/provisioning/dashboards/nodejs.json`, which also has been published to [Grafana's Dashboard Hub](https://grafana.com/grafana/dashboards/24130).
 
 ![](./assets/nodejs_grafana_overview.png)
 ![](./assets/nodejs_other_metrics.png)
